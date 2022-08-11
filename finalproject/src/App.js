@@ -1,24 +1,31 @@
-import logo from './logo.svg';
-import './App.css';
+import { BrowserRouter, Routes, Route } from "react-router-dom";
+import Home from "./components/Home";
+import SharedLayout from "./pages/SharedLayout";
+import ShoppingCart from "./components/ShoppingCart";
+import Footer from "./components/Footer";
+import Categories from "./components/Categories";
+import Products from "./components/Products";
+import Admin from "./components/Admin";
+import AdminNavbar from "./components/AdminNavbar";
+import SharedAdminLayout from "./components/SharedAdminLayout";
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <BrowserRouter>
+      <Routes>
+        <Route path="/" element={<SharedLayout />}>
+          <Route index element={<Home />} />
+          <Route path="categories" element={<Categories />} />
+          <Route path="products" element={<Products />} />
+          <Route path="shoppingCart" element={<ShoppingCart />} />
+        </Route>
+        <Route path="login" element={<SharedAdminLayout />}>
+          <Route path="admin" element={<Admin />} />
+          <Route path="adminNavbar" element={<AdminNavbar />} />
+        </Route>
+      </Routes>
+      <Footer />
+    </BrowserRouter>
   );
 }
 
