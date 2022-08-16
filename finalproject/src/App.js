@@ -29,8 +29,8 @@ function App() {
           <Route path="failPayment" element={<FailPayment />} />
         </Route>
 
-        <Route path="payment" element={<Payment />} />
-        <Route path="login" element={<Login />} />
+        <Route path="/payment" element={<Payment />} />
+        <Route path="/login" element={<Login />} />
 
         <Route path="admin" element={<SharedAdminLayout />}>
           <Route path="products" element={<Products />} />
