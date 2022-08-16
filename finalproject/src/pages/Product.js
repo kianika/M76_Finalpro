@@ -1,4 +1,4 @@
-function Navbar() {
+function Product() {
   
     return (
       
@@ -6,4 +6,4 @@ function Navbar() {
     );
   }
   
-  export default Navbar;
+  export default Product;
