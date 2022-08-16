@@ -3,7 +3,7 @@ import "../index.css";
 import Footer from "./Footer";
 import Navbar from "./Navbar";
 
-const SharedLayout = () => {
+const SharedAdminLayout = () => {
   return (
     <div>
       <Navbar />
@@ -12,4 +12,4 @@ const SharedLayout = () => {
     </div>
   );
 };
-export default SharedLayout;
+export default SharedAdminLayout;

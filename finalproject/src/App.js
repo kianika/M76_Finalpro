@@ -1,6 +1,6 @@
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Home from "./components/Home";
-import SharedLayout from "./pages/SharedLayout";
+import SharedLayout from "./components/SharedLayout";
 import ShoppingCart from "./components/ShoppingCart";
 import Footer from "./components/Footer";
 import Categories from "./components/Categories";
