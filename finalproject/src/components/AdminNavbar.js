@@ -53,13 +53,13 @@ function Navbar() {
             <Link to="/" className={classes.link}>
             <HomeIcon className={classes.icon}/>
             </Link>
-            <Link to="/shoppingCart" className={classes.link}>
+            <Link to="/admin/orders" className={classes.link}>
               سفارش ها
               </Link>
-            <Link to="/shoppingCart" className={classes.link}>
+            <Link to="/admin/inventory" className={classes.link}>
               موجودی و قیمت ها
               </Link>
-            <Link to="/login" className={classes.link}>
+            <Link to="/admin" className={classes.link}>
              کالاها
             </Link>
            
