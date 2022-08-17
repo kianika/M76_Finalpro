@@ -14,9 +14,14 @@ import Orders from "./pages/Orders"
 import Inventory from "./pages/Inventory"
 import Products from "./pages/Products"
 
+import { Provider } from "react-redux";
+import configureStore from "./store/Store";
+import "./App.css";
 
+const store = configureStore();
 function App() {
   return (
+    <Provider store={store}>
     <BrowserRouter>
       <Routes>
         <Route path="/" element={<SharedLayout />}>
@@ -29,7 +34,7 @@ function App() {
           <Route path="failPayment" element={<FailPayment />} />
         </Route>
 
-        <Route path="/payment" element={<Payment />} />
+        <Route path="payment" element={<Payment />} />
         <Route path="login" element={<Login />} />
 
         <Route path="admin" element={<SharedAdminLayout />}>
@@ -41,6 +46,7 @@ function App() {
       </Routes>
       
     </BrowserRouter>
+    </Provider>
   );
 }
 
