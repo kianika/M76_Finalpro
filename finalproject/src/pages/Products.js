@@ -4,7 +4,6 @@ import Button from '@mui/material/Button';
 import Typography from '@mui/material/Typography';
 import { useDispatch, useSelector } from "react-redux";
 import { loadproducts } from "../store/Products";
-import { loadcategories } from "../store/Categories";
 import { useEffect } from "react";
 import { List } from '@mui/material';
 import { ListItem } from '@mui/material';
