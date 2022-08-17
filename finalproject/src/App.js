@@ -30,10 +30,10 @@ function App() {
         </Route>
 
         <Route path="/payment" element={<Payment />} />
-        <Route path="/login" element={<Login />} />
+        <Route path="login" element={<Login />} />
 
         <Route path="admin" element={<SharedAdminLayout />}>
-          <Route path="products" element={<Products />} />
+          <Route index element={<Products />} />
           <Route path="inventory" element={<Inventory />} />
           <Route path="orders" element={<Orders />} />
         </Route>

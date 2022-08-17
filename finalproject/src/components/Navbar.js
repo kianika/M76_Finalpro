@@ -57,7 +57,7 @@ function Navbar() {
               سبد خرید
               <ShoppingBasketIcon className={classes.icon} />
               </Link>
-            <Link to="/admin" className={classes.link}>
+            <Link to="/login" className={classes.link}>
              مدیریت
             </Link>
            

@@ -12,6 +12,8 @@ import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
 import Typography from '@mui/material/Typography';
 import Container from '@mui/material/Container';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
+import { useNavigate } from 'react-router-dom';
+
 
 function Copyright(props) {
   return (
@@ -28,6 +30,7 @@ function Copyright(props) {
 
 const theme = createTheme();
 
+
 export default function SignIn() {
   const handleSubmit = (event) => {
     event.preventDefault();
@@ -36,6 +39,11 @@ export default function SignIn() {
       email: data.get('email'),
       password: data.get('password'),
     });
+  };
+  const navigate = useNavigate();
+  const navigateAdmin = () => {
+    // 👇️ navigate to /
+    navigate('/admin');
   };
 
   return (
@@ -54,7 +62,7 @@ export default function SignIn() {
             <LockOutlinedIcon />
           </Avatar>
           <Typography component="h1" variant="h5">
-            Sign in
+            ورود به پنل ادمین فروشگاه آنلاین کتابدار
           </Typography>
           <Box component="form" onSubmit={handleSubmit} noValidate sx={{ mt: 1 }}>
             <TextField
@@ -62,7 +70,7 @@ export default function SignIn() {
               required
               fullWidth
               id="email"
-              label="Email Address"
+              label="نام کاربری"
               name="email"
               autoComplete="email"
               autoFocus
@@ -72,32 +80,29 @@ export default function SignIn() {
               required
               fullWidth
               name="password"
-              label="Password"
+              label="رمز عبور"
               type="password"
               id="password"
               autoComplete="current-password"
             />
             <FormControlLabel
               control={<Checkbox value="remember" color="primary" />}
-              label="Remember me"
+              label="مرا بخاطر بسپار"
             />
             <Button
+            onClick={navigateAdmin}
               type="submit"
               fullWidth
               variant="contained"
               sx={{ mt: 3, mb: 2 }}
             >
-              Sign In
+              ورود
             </Button>
+          
             <Grid container>
               <Grid item xs>
                 <Link href="#" variant="body2">
-                  Forgot password?
-                </Link>
-              </Grid>
-              <Grid item>
-                <Link href="#" variant="body2">
-                  {"Don't have an account? Sign Up"}
+                  رمز عبور را فراموش کرده اید؟
                 </Link>
               </Grid>
             </Grid>
