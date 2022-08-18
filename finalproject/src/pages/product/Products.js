@@ -61,7 +61,7 @@ const Products = () => {
               <TableCell></TableCell>
               <TableCell align="right">دسته بندی</TableCell>
               <TableCell align="right">نام کتاب</TableCell>
-              <TableCell align="right">تصویر(g)</TableCell>
+              <TableCell align="right">تصویر</TableCell>
             </TableRow>
           </TableHead>
           <TableBody>
