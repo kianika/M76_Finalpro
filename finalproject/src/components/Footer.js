@@ -1,9 +1,8 @@
-function Footer() {
-  
+const Footer = () => {
     return (
-      
-    <p>Home</p>
-    );
-  }
+      <div>
   
+      </div>
+    );
+  };
   export default Footer;
