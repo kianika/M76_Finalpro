@@ -1,18 +1,18 @@
 import { BrowserRouter, Routes, Route } from "react-router-dom";
-import Home from "../pages/Home";
+import Home from "../pages/home/Home";
 import SharedLayout from "../layout/SharedLayout";
 import SharedAdminLayout from "../layout/SharedAdminLayout";
-import ShoppingCart from "../pages/ShoppingCart";
-import Categories from "../pages/Categories";
-import Product from "../pages/Product"
-import Login from "../pages/Login"
-import Checkout from "../pages/Checkout"
-import SuccessPayment from "../pages/SuccessPayment"
-import FailPayment from "../pages/FailPayment"
-import Payment from "../pages/Payment"
-import Orders from "../pages/Orders"
-import Inventory from "../pages/Inventory"
-import Products from "../pages/Products"
+import ShoppingCart from "../pages/payment/ShoppingCart";
+import Categories from "../pages/categories/Categories";
+import Product from "../pages/product/Product"
+import Login from "../pages/login/Login"
+import Checkout from "../pages/checkout/Checkout"
+import SuccessPayment from "../pages/payment/SuccessPayment"
+import FailPayment from "../pages/failpayment/FailPayment"
+import Payment from "../pages/payment/Payment"
+import Orders from "../pages/orders/Orders"
+import Inventory from "../pages/inventory/Inventory"
+import Products from "../pages/product/Products"
 
 
 
