@@ -24,7 +24,8 @@ const slice = createSlice({
     },
 });
 
-export default slice.reducer;
+
+export  const productsReducer = slice.reducer; ;
 
 const { productsRequested, productsReceived, productsRequestFailed } = slice.actions;
 

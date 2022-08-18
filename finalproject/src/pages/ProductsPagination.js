@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 
-function usePagination(products, itemsPerPage) {
+function useProductsPagination(products, itemsPerPage) {
   const [currentPage, setCurrentPage] = useState(1);
   const maxPage = Math.ceil(products.length / itemsPerPage);
 
@@ -26,4 +26,4 @@ function usePagination(products, itemsPerPage) {
   return { next, prev, jump, currentData, currentPage, maxPage };
 }
 
-export default usePagination;
+export default useProductsPagination;

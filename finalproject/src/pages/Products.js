@@ -17,11 +17,11 @@ import TableRow from '@mui/material/TableRow';
 import Paper from '@mui/material/Paper';
 import Pagination from '@mui/material/Pagination';
 import { useState } from "react";
-import usePagination from "./Pagination";
+import useProductsPagination from "./ProductsPagination";
 
 const Products = () => {
     const dispatch = useDispatch();
-    const products = useSelector((state) => state.list);
+    const products = useSelector((state) => state.products.list);
    
 
     useEffect(() => {
@@ -32,7 +32,7 @@ const Products = () => {
     const PER_PAGE = 5;
   
     const count = Math.ceil(products.length / PER_PAGE);
-    const _DATA = usePagination(products, PER_PAGE);
+    const _DATA = useProductsPagination(products, PER_PAGE);
 
     const handleChange = (e, p) => {
         setPage(p);
