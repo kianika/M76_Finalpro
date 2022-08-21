@@ -5,21 +5,23 @@ const slice = createSlice({
     name: "orders",
     initialState: {
         list: [],
-        loading: false,
+        loading: false
     },
 
     reducers: {
-        ordersRequested: (orders, action) => {
-           orders.loading = true;
+       ordersRequested: (filteredorders, action) => {
+           filteredorders.loading = true;
         },
 
-        ordersReceived: (orders, action) => {
+      ordersReceived: (orders, action) => {
             orders.list = action.payload;
+           orders.count = action.payload.length
+
             orders.loading = false;
         },
 
         ordersRequestFailed: (orders, action) => {
-            orders.loading = false;
+           orders.loading = false;
         },
     },
 });
@@ -28,9 +30,11 @@ export const ordersReducer =  slice.reducer;
 
 const { ordersRequested, ordersReceived, ordersRequestFailed } = slice.actions;
 
-const url = "/orders";
+let url = "";
 
-export const loadorders = () => (dispatch) => {
+
+export const loadorders = (delivered) => (dispatch) => {
+    url = `/orders?delivered=${delivered}`;
     return dispatch(
         apiCallBegan({
             url,
