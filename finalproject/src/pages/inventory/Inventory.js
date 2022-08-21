@@ -22,7 +22,7 @@ const Inventory = () => {
 
   useEffect(() => {
     dispatch(loadproducts());
-  }, [dispatch]);
+  }, []);
 
   let [page, setPage] = useState(1);
   const PER_PAGE = 5;
@@ -30,6 +30,7 @@ const Inventory = () => {
   const count = Math.ceil(products.length / PER_PAGE);
   const _DATA = useProductsPagination(products, PER_PAGE);
 
+  console.log(_DATA.currentData());
   const handleChange = (e, p) => {
     setPage(p);
     _DATA.jump(p);
