@@ -18,6 +18,7 @@ import Paper from "@mui/material/Paper";
 import Pagination from "@mui/material/Pagination";
 import { useState } from "react";
 import useProductsPagination from "./ProductsPagination";
+import Avatar from '@mui/material/Avatar';
 
 const Products = () => {
   const dispatch = useDispatch();
@@ -58,7 +59,9 @@ const Products = () => {
         <Table sx={{ minWidth: 650 }} aria-label="simple table">
           <TableHead>
             <TableRow>
-              <TableCell></TableCell>
+              <TableCell> 
+                
+</TableCell>
               <TableCell align="right">دسته بندی</TableCell>
               <TableCell align="right">نام کتاب</TableCell>
               <TableCell align="right">تصویر</TableCell>
@@ -79,7 +82,12 @@ const Products = () => {
                 <TableCell component="th" scope="row"></TableCell>
                 <TableCell align="right">{v.category}</TableCell>
                 <TableCell align="right">{v.name}</TableCell>
-                <TableCell align="right">{v.img}</TableCell>
+                <TableCell align="right"><Avatar
+  alt="The image"
+  src={v.image}
+  sx= {{ width: 76, height: 96 }}
+  variant ={"rounded"}  
+/></TableCell>
               </TableRow>
             ))}
           </TableBody>
