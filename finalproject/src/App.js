@@ -1,10 +1,11 @@
 
-import configureStore from "./store/Store";
+import configureStore from "./redux/Store";
 import "./App.css";
 import Router from "./routes/index";
 import { Provider } from "react-redux";
+import store from "./redux/Store";
 
-const store = configureStore();
+
 function App() {
   return (
     <Provider store={store}>

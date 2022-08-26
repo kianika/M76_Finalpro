@@ -31,7 +31,7 @@ const { filteredordersRequested, filteredordersReceived, filteredordersRequestFa
 let url = "";
 
 export const loadfilteredorders = (delivered, page) => (dispatch) => {
-    url = `/orders?delivered=${delivered}&_page=${page}&_limit=5`;
+    url = `/orders?delivered=${delivered}&_page=${page}&_limit=1`;
     return dispatch(
         apiCallBegan({
             url,

@@ -3,8 +3,7 @@ import Stack from "@mui/material/Stack";
 import Button from "@mui/material/Button";
 import Typography from "@mui/material/Typography";
 import { useDispatch, useSelector } from "react-redux";
-import { loadorders } from "../../store/orders";
-import { loadfilteredorders } from "../../store/filteredorders";
+import { fetchOrders } from "../../redux/feature/OrdersSlice"
 import { useEffect } from "react";
 import Table from "@mui/material/Table";
 import TableBody from "@mui/material/TableBody";
@@ -20,28 +19,34 @@ import RadioGroup from "@mui/material/RadioGroup";
 import FormControlLabel from "@mui/material/FormControlLabel";
 import FormControl from "@mui/material/FormControl";
 import Link from "@mui/material/Link";
+import Modal from "./components/Modal"
 
 const Orders = () => {
   const dispatch = useDispatch();
-  const filteredorders = useSelector((state) => state.filteredorders.list);
-  const orders = useSelector((state) => state.orders.list);
-
+  const data = useSelector((state) => state.orders.orders);
+  const total = useSelector((state) => state.orders.total);
+  console.log(total);
+  
+ console.log(data);
   const [delivered, setDelivered] = useState(true);
-  let [page, setPage] = useState(1);
+  const [page, setPage] = useState(1);
 
-  console.log(orders);
+ 
+  const [open, setOpen] = React.useState(false);
+  const handleOpen = () => setOpen(true);
+  const handleClose = () => setOpen(false);
+  const count = Math.ceil(total / 1);
   
 
-  useEffect(() => {
-    dispatch(loadorders(delivered));
-  }, [delivered, dispatch]);
+
 
   useEffect(() => {
-    dispatch(loadfilteredorders(delivered, page));
+    dispatch(fetchOrders({delivered, page}));
   }, [delivered, page, dispatch]);
 
-  let total = Math.ceil(orders.length / 5);
-  console.log(total);
+
+
+
 
   return (
     <React.Fragment>
@@ -86,15 +91,16 @@ const Orders = () => {
             </TableRow>
           </TableHead>
           <TableBody>
-            {filteredorders.length &&
-              filteredorders.map((v) => (
+            {data.length &&
+             data.map((v) => (
                 <TableRow
                   key={v.id}
                   sx={{ "&:last-child td, &:last-child th": { border: 0 } }}
                 >
                   <TableCell align="center" component="th" scope="row">
-                    <Link href="#">بررسی سفارش</Link>
-                  </TableCell>
+                    <Link href="#" onClick={handleOpen}>بررسی سفارش</Link>
+                    <Modal item={v} open = {open} onClose={handleClose} />
+          </TableCell>
                   <TableCell align="center">
                     {new Date(v.createdAt).getDay() +
                       "/" +
@@ -113,12 +119,16 @@ const Orders = () => {
       </TableContainer>
 
       <Pagination
-        count={total}
+        count={count}
         size="large"
+        page = {page}
         variant="outlined"
         shape="rounded"
-        onClick={(e) => setPage(e.target.textContent)}
+        onChange={(e, value) => setPage(value)}
+       
       />
+
+
     </React.Fragment>
   );
 };
