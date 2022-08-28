@@ -9,6 +9,7 @@ import Paper from "@mui/material/Paper";
 import Grid from "@mui/material/Grid";
 import { styled } from "@mui/material/styles";
 import Table from "./Table"
+import { Stack } from "@mui/system";
 
 
 
@@ -32,67 +33,64 @@ export default function Moodal({ item, open, onClose }) {
   return (
     <Modal open={open}>
       <Box sx={style}>
-        <Typography id="modal-modal-title" variant="h6" component="h2">
-          Text in a modal
-        </Typography>
+        <Box sx={{display:"flex", flexDirection: 'row-reverse'}}>
         <IconButton onClick={onClose}>
           <CloseIcon />
         </IconButton>
+        </Box>
+        <Typography id="modal-modal-title" variant="h6" component="h4">
+          Order Review
+        </Typography>
 
-        <Grid container spacing={3}>
-          <Grid item  xs={6} md={8}>
-           
-              <paper>{item.username + " " + item.lastname}</paper>
-           
+        <Grid container spacing={3} my={2}>
+          <Grid item  xs={6} md={5} > Customer Name :
           </Grid>
-          <Grid  item xs={6} md={4}>
-            : نام مشتری
+          <Grid  item xs={6} md={7} textAlign= "left" >
+          {item.username + " " + item.lastname}
           </Grid>
         </Grid>
 
-        <Grid container spacing={3}>
-          <Grid item  xs={6} md={8}>
+        <Grid container spacing={3} my={2}>
+          <Grid item  xs={6} md={5}>
            
-              <paper>{item.address}</paper>
-           
-          </Grid>
-          <Grid  item xs={6} md={4}>
-            :  آدرس
-          </Grid>
-        </Grid>
-        <Grid container spacing={3}>
-          <Grid item  xs={6} md={8}>
-           
-              <paper>{item.phone}</paper>
+             Address :
            
           </Grid>
-          <Grid  item xs={6} md={4}>
-            :  تلفن
+          <Grid  item xs={6} md={7} textAlign= "left">
+          {item.address}
           </Grid>
         </Grid>
-        <Grid container spacing={3}>
-          <Grid item  xs={6} md={8}>
+        <Grid container spacing={3} my={2}>
+          <Grid item  xs={6} md={5}>
+           
+             Phone Number :
+           
+          </Grid>
+          <Grid  item xs={6} md={7} textAlign= "left">
+          {item.phone}
+          </Grid>
+        </Grid>
+        <Grid container spacing={3} my={2}>
+          <Grid item  xs={6} md={5}>
           
-              <paper>{new Date(item.expectAt).toLocaleDateString('fa-IR', options) }</paper>
+             Delivery Date :
            
           </Grid>
-          <Grid  item xs={6} md={4}>
-            :  زمان تحویل
+          <Grid  item xs={6} md={7} textAlign= "left">
+          {new Date(item.expectAt).toLocaleDateString('fa-IR', options) }
           </Grid>
         </Grid>
 
-        <Grid container spacing={3}>
-          <Grid item  xs={6} md={8}>
+        <Grid container spacing={3} my={2}>
+          <Grid item  xs={6} md={5} textAlign= "left">
            
-              <paper>{new Date(item.createdAt).toLocaleDateString('fa-IR', options)}</paper>
+             Purchase Date :
            
           </Grid>
-          <Grid  item xs={6} md={4}>
-            :  زمان سفارش
+          <Grid  item xs={6} md={7}>
+          {new Date(item.createdAt).toLocaleDateString('fa-IR', options)}
           </Grid>
         </Grid>
-       
-        <Typography>{item.username}</Typography>
 
         <Table item = {item}/>
       </Box>

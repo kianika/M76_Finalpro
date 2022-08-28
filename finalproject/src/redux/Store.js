@@ -21,8 +21,14 @@ export default function store() {
 
 import { configureStore } from "@reduxjs/toolkit";
 import OrdersSlice from "./feature/OrdersSlice";
+import ProductsSlice from "./feature/ProductsSlice";
+import CategorySlice from "./feature/CategorySlice";
+import usersSlice from "./feature/usersSlice";
 
 
 
-const store = configureStore({reducer: { orders: OrdersSlice}})
+const store = configureStore({reducer: { orders: OrdersSlice,
+products: ProductsSlice,
+ categories: CategorySlice,
+ users: usersSlice}})
 export default store

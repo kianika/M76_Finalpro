@@ -1,12 +1,12 @@
 import { Outlet } from "react-router-dom";
 import "../index.css";
 import Footer from "../components/Footer";
-import AdminNavbar from "../components/AdminNavbar";
+import AdminAppBar from "../components/adminappbar/index";
 
 const SharedAdminLayout = () => {
   return (
     <div>
-      <AdminNavbar />
+      <AdminAppBar />
       <Outlet />
       <Footer />
     </div>

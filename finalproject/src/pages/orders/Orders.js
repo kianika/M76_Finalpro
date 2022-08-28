@@ -20,6 +20,9 @@ import FormControlLabel from "@mui/material/FormControlLabel";
 import FormControl from "@mui/material/FormControl";
 import Link from "@mui/material/Link";
 import Modal from "./components/Modal"
+import Container from "@mui/material/Container";
+import { Colors } from "../../styles/theme";
+
 
 const Orders = () => {
   const dispatch = useDispatch();
@@ -30,12 +33,12 @@ const Orders = () => {
  console.log(data);
   const [delivered, setDelivered] = useState(true);
   const [page, setPage] = useState(1);
-
+  const options = { year: 'numeric', month: 'numeric', day: 'numeric' };
  
   const [open, setOpen] = React.useState(false);
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
-  const count = Math.ceil(total / 1);
+  const count = Math.ceil(total / 5);
   
 
 
@@ -45,12 +48,11 @@ const Orders = () => {
   }, [delivered, page, dispatch]);
 
 
-
-
-
   return (
     <React.Fragment>
-      <Stack direction="row" spacing={130} mx={3} my={2} className="header">
+      <Container>
+        <Stack direction="row" spacing={84} mt={4} my={4} className="header">
+    
         <FormControl component="fieldset">
           <RadioGroup
             aria-labelledby="demo-radio-buttons-group-label"
@@ -60,7 +62,7 @@ const Orders = () => {
             <FormControlLabel
               value="sent"
               control={<Radio />}
-              label="سفارش های تحویل شده"
+              label="Delivered Items"
               defaultChecked={true}
               onClick={() => {
                 setDelivered(true);
@@ -69,47 +71,46 @@ const Orders = () => {
             <FormControlLabel
               value="pending"
               control={<Radio />}
-              label="سفارش های در انتظار ارسال"
+              label="Pending Orders"
               onClick={() => {
                 setDelivered(false);
               }}
             />
           </RadioGroup>
         </FormControl>
+   
 
-        <Typography variant="h4">مدیریت سفارش ها</Typography>
+        <Typography variant="h4">  Orders Managemen</Typography>
       </Stack>
 
       <TableContainer component={Paper}>
         <Table sx={{ minWidth: 650 }} aria-label="simple table">
-          <TableHead>
+        <TableHead
+       sx={{
+        border: "2px solid grey",
+        backgroundColor: Colors.secondary,
+      }}>
             <TableRow>
-              <TableCell align="center"> </TableCell>
-              <TableCell align="center">زمان ثبت سفارش </TableCell>
-              <TableCell align="center"> مجموع مبلغ</TableCell>
-              <TableCell align="center">نام کاربر</TableCell>
+              <TableCell align="left"> User Name</TableCell>
+              <TableCell align="left">  Total Price </TableCell>
+              <TableCell align="left">  Purchase Date</TableCell>
+              <TableCell align="left"> </TableCell>
             </TableRow>
           </TableHead>
           <TableBody>
             {data.length &&
              data.map((v) => (
                 <TableRow
-                  key={v.id}
-                  sx={{ "&:last-child td, &:last-child th": { border: 0 } }}
-                >
-                  <TableCell align="center" component="th" scope="row">
-                    <Link href="#" onClick={handleOpen}>بررسی سفارش</Link>
+                  key={v.id} >
+                  <TableCell align="left">
+                    <Link href="#" onClick={handleOpen}> View Order</Link>
                     <Modal item={v} open = {open} onClose={handleClose} />
           </TableCell>
-                  <TableCell align="center">
-                    {new Date(v.createdAt).getDay() +
-                      "/" +
-                      new Date(v.createdAt).getMonth() +
-                      "/" +
-                      new Date(v.createdAt).getFullYear()}
+                  <TableCell align="left">
+                  {new Date(v.createdAt).toLocaleDateString("en-US", options)}
                   </TableCell>
-                  <TableCell align="center">{v.prices}</TableCell>
-                  <TableCell align="center">
+                  <TableCell align="left">{v.prices}</TableCell>
+                  <TableCell align="left">
                     {v.username + " " + v.lastname}
                   </TableCell>
                 </TableRow>
@@ -128,7 +129,7 @@ const Orders = () => {
        
       />
 
-
+</Container>
     </React.Fragment>
   );
 };

@@ -6,9 +6,9 @@ import TableContainer from "@material-ui/core/TableContainer";
 import TableHead from "@material-ui/core/TableHead";
 import TableRow from "@material-ui/core/TableRow";
 import Button from "@mui/material/Button";
-import { editorders } from '../../../store/UpdateOrdersList';
 import { useDispatch } from 'react-redux';
 import { changeDelivered } from '../../../redux/feature/OrdersSlice';
+import { Colors } from "../../../styles/theme";
 
 
 export default function ProductTable({item}) {
@@ -22,8 +22,12 @@ export default function ProductTable({item}) {
     
   return (
     <TableContainer>
-    <Table aria-label="simple table" stickyHeader>
-      <TableHead>
+    <Table sx={{ border: "2px solid grey" }}>
+      <TableHead
+       sx={{
+        border: "2px solid grey",
+        backgroundColor: Colors.secondary,
+      }}>
         <TableRow>
           <TableCell>نام کالا</TableCell>
           <TableCell align="right">قیمت</TableCell>

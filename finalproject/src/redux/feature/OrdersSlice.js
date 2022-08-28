@@ -10,7 +10,7 @@ const initialState = {
 }
 
 export const fetchOrders = createAsyncThunk("orders/fetchOrders", ({delivered, page}) => {
-    return axios.get(`${BASE_URL}?delivered=${delivered}&_page=${page}&_limit=1`).then(response =>{
+    return axios.get(`${BASE_URL}?delivered=${delivered}&_page=${page}&_limit=5`).then(response =>{
         return {
           data : response.data,
           total: Number(response.headers["x-total-count"])
