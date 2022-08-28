@@ -3,7 +3,7 @@ import Stack from "@mui/material/Stack";
 import Button from "@mui/material/Button";
 import Typography from "@mui/material/Typography";
 import { useDispatch, useSelector } from "react-redux";
-import { loadproducts } from "../../store/Products";
+import { fetchProducts } from "../../redux/feature/ProductsSlice";
 import { useEffect } from "react";
 import Table from "@mui/material/Table";
 import TableBody from "@mui/material/TableBody";
@@ -14,45 +14,47 @@ import TableRow from "@mui/material/TableRow";
 import Paper from "@mui/material/Paper";
 import Pagination from "@mui/material/Pagination";
 import { useState } from "react";
-import useProductsPagination from "../product/ProductsPagination";
+import { Container } from "@mui/system";
+import { Colors } from "../../styles/theme";
+
 
 const Inventory = () => {
   const dispatch = useDispatch();
-  const products = useSelector((state) => state.products.list);
-
-  useEffect(() => {
-    dispatch(loadproducts());
-  }, []);
+  const products = useSelector((state) => state.products.products);
+  const total = useSelector((state) => state.products.total);
 
   let [page, setPage] = useState(1);
-  const PER_PAGE = 5;
+  const count = Math.ceil(total / 5);
 
-  const count = Math.ceil(products.length / PER_PAGE);
-  const _DATA = useProductsPagination(products, PER_PAGE);
+  useEffect(() => {
+    dispatch(fetchProducts({ page }));
+  }, [page, dispatch]);
 
-  console.log(_DATA.currentData());
-  const handleChange = (e, p) => {
-    setPage(p);
-    _DATA.jump(p);
-  };
+
 
   return (
     <React.Fragment>
-      <Stack direction="row" spacing={130} mx={3} my={2} className="header">
-        <Button variant="contained" color="success">
+      <Container>
+        <Stack direction="row" spacing={99} mt={4} my={4} mx={3}>
+        <Button variant="contained"
+            sx={{ backgroundColor: Colors.primary, color: Colors.white }}>
           ذخیره
         </Button>
-        <Typography variant="h4">مدیریت موجودی و قیمت ها</Typography>
+        <Typography variant="h5">  Inventory Mnagement  </Typography>
       </Stack>
-
+<Container sx={{display: "flex", alignItems:"center", justifyContent:"center"}}>
       <TableContainer component={Paper}>
-        <Table sx={{ minWidth: 650 }} aria-label="simple table">
-          <TableHead>
+      <Table sx={{ border: "2px solid grey" }}>
+            <TableHead
+              sx={{
+                border: "2px solid grey",
+                backgroundColor: Colors.secondary,
+              }}
+            >
             <TableRow>
-              <TableCell></TableCell>
-              <TableCell align="right"> موجودی</TableCell>
-              <TableCell align="right"> قیمت</TableCell>
-              <TableCell align="right">کالا</TableCell>
+              <TableCell align="left">Item</TableCell>
+              <TableCell align="left"> Price</TableCell>
+              <TableCell align="left"> Inventory</TableCell>
             </TableRow>
           </TableHead>
           <TableBody>
@@ -62,20 +64,18 @@ const Inventory = () => {
                         </ListItem>
                 ))} */}
 
-            {_DATA.currentData().map((v) => (
+            {products.map((v) => (
               <TableRow
-                key={v.id}
-                sx={{ "&:last-child td, &:last-child th": { border: 0 } }}
-              >
-                <TableCell component="th" scope="row"></TableCell>
-                <TableCell align="right">{v.quantity}</TableCell>
-                <TableCell align="right">{v.price}</TableCell>
-                <TableCell align="right">{v.name}</TableCell>
+                key={v.id}>
+                <TableCell align="left">{v.name}</TableCell>
+                <TableCell align="left">{v.price}</TableCell>
+                <TableCell align="left">{v.quantity}</TableCell> 
               </TableRow>
             ))}
           </TableBody>
         </Table>
       </TableContainer>
+      </Container>
 
       <Pagination
         count={count}
@@ -83,9 +83,11 @@ const Inventory = () => {
         page={page}
         variant="outlined"
         shape="rounded"
-        onChange={handleChange}
+        onChange={(e, value) => setPage(value)}
       />
+      </Container>
     </React.Fragment>
+    
   );
 };
 export default Inventory;

@@ -12,26 +12,35 @@ import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
 import Typography from '@mui/material/Typography';
 import Container from '@mui/material/Container';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
-import { useNavigate } from 'react-router-dom';
+import { useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { Navigate } from "react-router-dom";
+import { login } from "../../redux/feature/usersSlice";
 
 
 const theme = createTheme();
 
 
 export default function SignIn() {
+
+  const [username, setUsername] = useState("");
+  const [password, setPassword] = useState("");
+  const dispatch = useDispatch();
+  const { error, isLoggedIn } = useSelector((state) => state.users);
+
+
+
+
   const handleSubmit = (event) => {
     event.preventDefault();
     const data = new FormData(event.currentTarget);
-    console.log({
-      email: data.get('email'),
-      password: data.get('password'),
-    });
+    setUsername(data.get('email'));
+    setPassword(data.get('password'));
+    dispatch(login({ username, password }));
   };
-  const navigate = useNavigate();
-  const navigateAdmin = () => {
-    // 👇️ navigate to /
-    navigate('/admin');
-  };
+
+  console.log(username);
+  if (isLoggedIn) return <Navigate to={'/admin'} />;
 
   return (
     <ThemeProvider theme={theme}>
@@ -52,6 +61,7 @@ export default function SignIn() {
             ورود به پنل ادمین فروشگاه آنلاین کتابدار
           </Typography>
           <Box component="form" onSubmit={handleSubmit} noValidate sx={{ mt: 1 }}>
+         
             <TextField
               margin="normal"
               required
@@ -77,7 +87,6 @@ export default function SignIn() {
               label="مرا بخاطر بسپار"
             />
             <Button
-            onClick={navigateAdmin}
               type="submit"
               fullWidth
               variant="contained"
