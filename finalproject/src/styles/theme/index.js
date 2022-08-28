@@ -45,7 +45,7 @@ const theme = createTheme({
       defaultProps: {
         disableRipple: true,
         disableElevation: true,
-      },
+      }, 
     },
     MuiTooltip: {
       defaultProps: {

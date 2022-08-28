@@ -407,7 +407,6 @@
     }
   ],
   "orders": [
-    
     {
       "username": "Florian",
       "lastname": "Moser",
@@ -417,7 +416,7 @@
       "products": [
         {
           "id": 2,
-          "name":"The Wonderful Things You Will Be",
+          "name": "The Wonderful Things You Will Be",
           "count": "1",
           "price": 20.92,
           "image": "http://localhost:3002/files/0d29e11e33a8c67f1a88266c00dc53d4"
@@ -467,7 +466,7 @@
       "delivered": "false",
       "createdAt": 1646158398160,
       "id": 3
-    } ,
+    },
     {
       "username": "Monika",
       "lastname": "Mayer",
@@ -487,7 +486,7 @@
       "delivered": "false",
       "createdAt": 1646158398160,
       "id": 4
-    } ,
+    },
     {
       "username": "Monika",
       "lastname": "Mayer",
@@ -504,10 +503,10 @@
         }
       ],
       "prices": 11.19,
-      "delivered": "false",
+      "delivered": true,
       "createdAt": 1646158398160,
       "id": 5
-    } ,
+    },
     {
       "username": "Monika",
       "lastname": "Mayer",
@@ -527,7 +526,7 @@
       "delivered": "false",
       "createdAt": 1646158398160,
       "id": 6
-    } ,
+    },
     {
       "username": "Regina",
       "lastname": "Holzinger",
@@ -547,7 +546,7 @@
       "delivered": "true",
       "createdAt": 1646158398160,
       "id": 7
-    } ,
+    },
     {
       "username": "Regina",
       "lastname": "Holzinger",
@@ -567,7 +566,7 @@
       "delivered": "true",
       "createdAt": 1646158398160,
       "id": 8
-    } ,
+    },
     {
       "username": "Regina",
       "lastname": "Holzinger",
@@ -587,7 +586,7 @@
       "delivered": "true",
       "createdAt": 1646158398160,
       "id": 9
-    } ,
+    },
     {
       "username": "Regina",
       "lastname": "Holzinger",
@@ -607,7 +606,7 @@
       "delivered": "true",
       "createdAt": 1646158398160,
       "id": 10
-    } ,
+    },
     {
       "username": "Melani",
       "lastname": "Müller",

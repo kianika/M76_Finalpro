@@ -1,56 +1,48 @@
 import React from 'react'
-import Table from "@material-ui/core/Table";
-import TableBody from "@material-ui/core/TableBody";
-import TableCell from "@material-ui/core/TableCell";
-import TableContainer from "@material-ui/core/TableContainer";
-import TableHead from "@material-ui/core/TableHead";
-import TableRow from "@material-ui/core/TableRow";
-import Button from "@mui/material/Button";
-import { useDispatch } from 'react-redux';
-import { changeDelivered } from '../../../redux/feature/OrdersSlice';
+import Table from "@mui/material/Table";
+import TableBody from "@mui/material/TableBody";
+import TableCell from "@mui/material/TableCell";
+import TableHead from "@mui/material/TableHead";
+import TableRow from "@mui/material/TableRow";
 import { Colors } from "../../../styles/theme";
 
 
-export default function ProductTable({item}) {
-    const products = [...item.products]
+export default function ProductTable({tempOrder}) {
+    const products = [...tempOrder.products]
 
-    const dispatch = useDispatch();
-    const handleUpdate = (id) => {
-      dispatch(changeDelivered(id))
-    }
-  
+   
     
   return (
-    <TableContainer>
-    <Table sx={{ border: "2px solid grey" }}>
+    
+    <Table >
       <TableHead
        sx={{
         border: "2px solid grey",
         backgroundColor: Colors.secondary,
       }}>
         <TableRow>
-          <TableCell>نام کالا</TableCell>
-          <TableCell align="right">قیمت</TableCell>
-          <TableCell align="right">تعداد</TableCell>
+          <TableCell align="left">Count</TableCell>
+          <TableCell align="left">Price</TableCell>
+          <TableCell align="left">Product Name</TableCell>
         </TableRow>
       </TableHead>
       <TableBody>
         {products.map((row) => (
           <TableRow key={row.id}>
             <TableCell component="th" scope="row">
-              {row.name}
+            {row.count}
             </TableCell>
             <TableCell align="right">
                 {row.price}
             </TableCell>
             <TableCell align="right">
-                {row.count}
+            {row.name}
             </TableCell>
           </TableRow>
         ))}
-        <Button onClick={dispatch(handleUpdate)}>تحویل شد</Button>
+      
       </TableBody>
     </Table>
-  </TableContainer>
+ 
   )
 }
