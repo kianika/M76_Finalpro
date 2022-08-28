@@ -22,25 +22,24 @@ import Link from "@mui/material/Link";
 import Modal from "./components/Modal";
 import Container from "@mui/material/Container";
 import { Colors } from "../../styles/theme";
-import  { Button } from "@mui/material";
+import { Button } from "@mui/material";
 
 const Orders = () => {
   const dispatch = useDispatch();
   const data = useSelector((state) => state.orders.orders);
   const total = useSelector((state) => state.orders.total);
-  
+
   const [delivered, setDelivered] = useState(true);
   const [page, setPage] = useState(1);
   const options = { year: "numeric", month: "numeric", day: "numeric" };
-  const [info, setInfo] = useState({}, false)
+  const [info, setInfo] = useState({}, false);
   const [open, setOpen] = useState(false);
   const handleClose = () => setOpen(false);
   const handleOpen = (id) => {
     setOpen(true);
-   
-    setInfo(data.find((order) => order.id === id))
-    
-    }
+
+    setInfo(data.find((order) => order.id === id));
+  };
 
   //const handleClose = () => setOpen(false);
   const count = Math.ceil(total / 5);
@@ -48,7 +47,6 @@ const Orders = () => {
   useEffect(() => {
     dispatch(fetchOrders({ delivered, page }));
   }, [delivered, page, dispatch]);
-
 
   return (
     <React.Fragment>
@@ -92,9 +90,9 @@ const Orders = () => {
               }}
             >
               <TableRow>
-                <TableCell align="left"> User Name</TableCell>
-                <TableCell align="left"> Total Price </TableCell>
-                <TableCell align="left"> Purchase Date</TableCell>
+                <TableCell align="left">User Name </TableCell>
+                <TableCell align="left">Total Price</TableCell>
+                <TableCell align="left">  Purchase Date </TableCell>
                 <TableCell align="left"> </TableCell>
               </TableRow>
             </TableHead>
@@ -103,27 +101,27 @@ const Orders = () => {
                 data.map((v) => (
                   <TableRow key={v.id}>
                     <TableCell align="left">
-                      <Button  onClick={() => handleOpen(v.id)}>
-                        View Order
-                      </Button>
-                    {open && (<Modal tempOrder = {info}   setOpen ={setOpen} open = {open}/>)}
-                    </TableCell>
-                    <TableCell align="left">
-                      {new Date(v.createdAt).toLocaleDateString(
-                        "en-US",
-                        options
-                      )}
+                      {v.username + " " + v.lastname}
                     </TableCell>
                     <TableCell align="left">{v.prices}</TableCell>
                     <TableCell align="left">
-                      {v.username + " " + v.lastname}
+                     {new Date(v.createdAt).toLocaleDateString("en-US", options)}
                     </TableCell>
+                    <TableCell align="left">
+                    <Button onClick={() => handleOpen(v.id)}>
+                        View Order
+                      </Button>
+                      {open && (
+                        <Modal tempOrder={info} setOpen={setOpen} open={open} />
+                      )}
+                     </TableCell>
+                   
                   </TableRow>
                 ))}
             </TableBody>
           </Table>
         </TableContainer>
-        <Modal tempOrder = {info} setOpen = {setOpen}  />
+        <Modal tempOrder={info} setOpen={setOpen} />
         <Pagination
           count={count}
           size="large"
@@ -131,6 +129,7 @@ const Orders = () => {
           variant="outlined"
           shape="rounded"
           onChange={(e, value) => setPage(value)}
+          sx={{ my: 5 }}
         />
       </Container>
     </React.Fragment>

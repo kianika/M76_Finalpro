@@ -29,13 +29,13 @@ export default function ProductTable({tempOrder}) {
       <TableBody>
         {products.map((row) => (
           <TableRow key={row.id}>
-            <TableCell component="th" scope="row">
+            <TableCell align='left'>
             {row.count}
             </TableCell>
-            <TableCell align="right">
+            <TableCell align="left">
                 {row.price}
             </TableCell>
-            <TableCell align="right">
+            <TableCell align="left">
             {row.name}
             </TableCell>
           </TableRow>

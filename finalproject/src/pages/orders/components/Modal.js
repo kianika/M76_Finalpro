@@ -13,6 +13,7 @@ import { Stack } from "@mui/system";
 import { useDispatch, useSelector } from "react-redux";
 import { changeDelivered } from "../../../redux/feature/OrdersSlice";
 import { Colors } from "../../../styles/theme";
+import { Divider } from "@mui/material";
 
 const style = {
   position: "absolute",
@@ -40,11 +41,12 @@ export default function Moodal(props) {
             <CloseIcon />
           </IconButton>
         </Box>
-        <Typography id="modal-modal-title" variant="h6" component="h4">
+        <Typography id="modal-modal-title" variant="h6" component="h4" mx= {2} my={1} >
           Order Review
         </Typography>
-<Box marginBottom={4}>
-        <Grid container spacing={3} my={2}>
+        <Divider orientation = "horizontal" flexItem />
+<Box marginBottom={4} mx= {2}>
+        <Grid container spacing={3} my={1}>
           <Grid item xs={6} md={5}>
             {" "}
             Customer Name :
@@ -54,7 +56,7 @@ export default function Moodal(props) {
           </Grid>
         </Grid>
 
-        <Grid container spacing={3} my={2}>
+        <Grid container spacing={3} my={1}>
           <Grid item xs={6} md={5}>
             Address :
           </Grid>
@@ -62,7 +64,7 @@ export default function Moodal(props) {
             {tempOrder.address}
           </Grid>
         </Grid>
-        <Grid container spacing={3} my={2}>
+        <Grid container spacing={3} my={1}>
           <Grid item xs={6} md={5}>
             Phone Number :
           </Grid>
@@ -70,7 +72,7 @@ export default function Moodal(props) {
             {tempOrder.phone}
           </Grid>
         </Grid>
-        <Grid container spacing={3} my={2}>
+        <Grid container spacing={3} my={1}>
           <Grid item xs={6} md={5}>
             Delivery Date :
           </Grid>
@@ -79,7 +81,7 @@ export default function Moodal(props) {
           </Grid>
         </Grid>
 
-        <Grid container spacing={3} my={2}>
+        <Grid container spacing={3} my={1}>
           <Grid item xs={6} md={5} textAlign="left">
             Purchase Date :
           </Grid>
