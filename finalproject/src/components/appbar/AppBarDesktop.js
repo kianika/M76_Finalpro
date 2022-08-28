@@ -1,4 +1,4 @@
-import React from "react";
+/* import React from "react";
 import ShoppingBasketIcon from '@mui/icons-material/ShoppingBasket';
 import HomeIcon from '@mui/icons-material/Home';
 import MenuBookIcon from '@mui/icons-material/MenuBook';
@@ -70,3 +70,50 @@ function Navbar() {
   );
 }
 export default Navbar;
+*/
+
+import {
+  Box,
+  Divider,
+  List,
+  ListItemButton,
+  ListItemIcon,
+  ListItemText,
+  Stack,
+  Typography,
+} from "@mui/material";
+import {
+  AppbarActionIcons,
+  AppbarContainer,
+  AppbarHeader,
+  InList,
+} from "../../styles/appbar";
+
+import SearchIcon from "@mui/icons-material/Search";
+import Actions from "./Actions";
+import { Link } from "react-router-dom";
+import HomeIcon from '@mui/icons-material/Home';
+
+export default function AppBarDesktop({ matches }) {
+  
+
+  const linkStyle = {
+    margin: "1rem",
+    textDecoration: "none"
+  };
+  
+  return (
+    <AppbarContainer>
+      <Link to="/" style={linkStyle}> <AppbarHeader variant="h4">Kianika</AppbarHeader>
+      </Link>
+      <InList type="row">
+        <ListItemButton>
+          <ListItemIcon>
+            <SearchIcon />
+          </ListItemIcon>
+        </ListItemButton>
+          </InList>
+       <Actions matches={matches} />   
+    </AppbarContainer>
+  );
+}

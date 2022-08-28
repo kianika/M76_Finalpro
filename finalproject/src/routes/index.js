@@ -13,6 +13,7 @@ import Payment from "../pages/payment/Payment"
 import Orders from "../pages/orders/Orders"
 import Inventory from "../pages/inventory/Inventory"
 import Products from "../pages/product/Products"
+import PrivateRoute from "./PrivateRoute";
 
 
 
@@ -36,12 +37,15 @@ function Router() {
             <Route path="payment" element={<Payment />} />
             <Route path="login" element={<Login />} />
     
-            <Route path="admin" element={<SharedAdminLayout />}>
-              <Route index element={<Products />} />
-              <Route path="inventory" element={<Inventory />} />
-              <Route path="orders" element={<Orders />} />
+            
+               <Route path="admin" element={<PrivateRoute><SharedAdminLayout /></PrivateRoute>}>
+              
+             <Route index element={<Products />} />
+           <Route path="inventory" element={<Inventory />} />
+             <Route path="orders" element={<Orders />} />
+             
             </Route>
-    
+   
           </Routes>
           
         </BrowserRouter>

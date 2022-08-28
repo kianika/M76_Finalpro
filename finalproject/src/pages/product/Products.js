@@ -3,11 +3,8 @@ import Stack from "@mui/material/Stack";
 import Button from "@mui/material/Button";
 import Typography from "@mui/material/Typography";
 import { useDispatch, useSelector } from "react-redux";
-import { loadproducts } from "../../store/Products";
+import { fetchProducts } from "../../redux/feature/ProductsSlice";
 import { useEffect } from "react";
-import { List } from "@mui/material";
-import { ListItem } from "@mui/material";
-import { ListItemText } from "@mui/material";
 import Table from "@mui/material/Table";
 import TableBody from "@mui/material/TableBody";
 import TableCell from "@mui/material/TableCell";
@@ -17,91 +14,97 @@ import TableRow from "@mui/material/TableRow";
 import Paper from "@mui/material/Paper";
 import Pagination from "@mui/material/Pagination";
 import { useState } from "react";
-import useProductsPagination from "./ProductsPagination";
-import Avatar from '@mui/material/Avatar';
+import Avatar from "@mui/material/Avatar";
+import CreateIcon from "@mui/icons-material/Create";
+import DeleteIcon from "@mui/icons-material/Delete";
+import Container from "@mui/material/Container";
+import { Colors } from "../../styles/theme";
+import { fetchCategory } from "../../redux/feature/CategorySlice";
 
 const Products = () => {
   const dispatch = useDispatch();
-  const products = useSelector((state) => state.products.list);
+  const products = useSelector((state) => state.products.products);
+  const total = useSelector((state) => state.products.total);
+  const categories = useSelector((state) => state.categories.categories);
+ 
+  
+  let [page, setPage] = useState(1);
+  const count = Math.ceil(total / 5);
 
   useEffect(() => {
-    dispatch(loadproducts());
-  }, [dispatch]);
+    dispatch(fetchProducts({ page }));
+  }, [page, dispatch]);
 
-  let [page, setPage] = useState(1);
-  const PER_PAGE = 5;
-
-  const count = Math.ceil(products.length / PER_PAGE);
-  const _DATA = useProductsPagination(products, PER_PAGE);
-
-  const handleChange = (e, p) => {
-    setPage(p);
-    _DATA.jump(p);
-  };
+  useEffect(() => {
+    dispatch(fetchCategory());
+   
+  }, []);
 
   return (
     <React.Fragment>
-      <Stack
-        direction="row"
-        spacing={150}
-        mt={4}
-        mx={4}
-        my={4}
-        className="header"
-      >
-        <Button variant="contained" color="success">
-          افزودن کالا
-        </Button>
-        <Typography variant="h4">مدیریت کالاها</Typography>
-      </Stack>
+      <Container>
+        <Stack direction="row" spacing={98} mt={4} my={4} className="header">
+          <Button
+            variant="contained"
+            sx={{ backgroundColor: Colors.primary, color: Colors.white }}
+          >
+            Add Item{" "}
+          </Button>
+          <Typography variant="h5"> Products Management</Typography>
+        </Stack>
 
-      <TableContainer component={Paper}>
-        <Table sx={{ minWidth: 650 }} aria-label="simple table">
-          <TableHead>
-            <TableRow>
-              <TableCell> 
-                
-</TableCell>
-              <TableCell align="right">دسته بندی</TableCell>
-              <TableCell align="right">نام کتاب</TableCell>
-              <TableCell align="right">تصویر</TableCell>
-            </TableRow>
-          </TableHead>
-          <TableBody>
-            {/*  {products.map((product) => (
-                    <ListItem key={product.id}>
-                        <ListItemText>{product.name}</ListItemText>
-                        </ListItem>
-                ))} */}
-
-            {_DATA.currentData().map((v) => (
-              <TableRow
-                key={v.id}
-                sx={{ "&:last-child td, &:last-child th": { border: 0 } }}
-              >
-                <TableCell component="th" scope="row"></TableCell>
-                <TableCell align="right">{v.category}</TableCell>
-                <TableCell align="right">{v.name}</TableCell>
-                <TableCell align="right"><Avatar
-  alt="The image"
-  src={v.image}
-  sx= {{ width: 76, height: 96 }}
-  variant ={"rounded"}  
-/></TableCell>
+        <TableContainer>
+          <Table sx={{ border: "2px solid grey" }}>
+            <TableHead
+              sx={{
+                border: "2px solid grey",
+                backgroundColor: Colors.secondary,
+              }}
+            >
+              <TableRow>
+                <TableCell align="left"> Image</TableCell>
+                <TableCell align="left">Product Name</TableCell>
+                <TableCell align="left">Category </TableCell>
+                <TableCell align="left"></TableCell>
               </TableRow>
-            ))}
-          </TableBody>
-        </Table>
-      </TableContainer>
+            </TableHead>
+            <TableBody>
+              {products.map((v) => (
+                <TableRow key={v.id}>
+                  <TableCell align="left">
+                    <Avatar
+                      alt="The image"
+                      src={v.image}
+                      sx={{ width: 44, height: 54 }}
+                      variant={"rounded"}
+                    />
+                  </TableCell>
+                  {}
+                  <TableCell align="left">{v.name}</TableCell>
+                  <TableCell align="left">{categories.map((item) => {if (item.id == v.category){
+                    return `${item.name}`
+                  }})}</TableCell>
+                  <TableCell align="left">
+                    <Stack direction="row" spacing={5}>
+                      <CreateIcon />
+                      <DeleteIcon />
+                    </Stack>{" "}
+                  </TableCell>
+                </TableRow>
+              ))}
+            </TableBody>
+          </Table>
+        </TableContainer>
 
-      <Pagination
-        count={count}
-        size="large"
-        page={page}
-        variant="outlined"
-        shape="rounded"
-        onChange={handleChange}
-      />
+        <Pagination
+          count={count}
+          size="large"
+          page={page}
+          variant="outlined"
+          shape="rounded"
+          onChange={(e, value) => setPage(value)}
+        />
+      </Container>
     </React.Fragment>
   );
 };
