@@ -33,10 +33,10 @@ export const Colors = {
 const theme = createTheme({
   palette: {
     primary: {
-      main: Colors.primary,
+      main: Colors.secondary,
     },
     secondary: {
-      main: Colors.secondary,
+      main: Colors.secondary
     },
   },
 
@@ -81,9 +81,11 @@ const theme = createTheme({
 
     MuiOutlinedInput: {
       styleOverrides: {
+        root : {
+         borderBlockColor: Colors.primary
+        },
        input: {
-          padding: "3px",
-          textAlign: "center"
+         color: Colors.dim_grey
         }
       }
   },

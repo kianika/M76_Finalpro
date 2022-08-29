@@ -16,8 +16,10 @@ import { InputLabel } from "@material-ui/core";
 import { CKEditor } from "@ckeditor/ckeditor5-react";
 import ClassicEditor from "@ckeditor/ckeditor5-build-classic";
 import { useDispatch } from "react-redux";
-import { createProducts, fetchProducts } from "../../../redux/feature/ProductsSlice";
-
+import {
+  createProducts,
+  fetchProducts,
+} from "../../../redux/feature/ProductsSlice";
 
 const style = {
   position: "absolute",
@@ -29,9 +31,8 @@ const style = {
   bgcolor: "background.paper",
   border: "2px solid #000",
   boxShadow: 24,
-  p: 2,
   zIndex: 1,
-  overflow: "scroll",
+  p: 4,
 };
 
 const iconstyle = {
@@ -59,7 +60,7 @@ export default function Moodal(props) {
   const imageChange = (e) => {
     if (e.target.files && e.target.files.length > 0) {
       let file = e.target.files[0];
-      let pic = URL.createObjectURL(file)
+      let pic = URL.createObjectURL(file);
       setSelectedImage(pic);
     }
   };
@@ -86,11 +87,11 @@ export default function Moodal(props) {
 
   const handleAddNewBook = (e) => {
     e.preventDefault();
-   
+
     dispatch(createProducts(makeNewProduct()));
     setOpen(false);
-   setLoading(!loading);
-   
+    setLoading(!loading);
+
     console.log(makeNewProduct());
   };
 
@@ -112,135 +113,134 @@ export default function Moodal(props) {
           Add - Edit Item
         </Typography>
         <Divider orientation="horizontal" flexItem />
-        <Box marginBottom={4} mx={2}>
+        <Box sx={{ my: 2 }}>
           <form onSubmit={(e) => handleAddNewBook(e)}>
             <Grid container>
-              <Grid container>
-                <Grid item xs={6}>
+              <Grid item xs={12}>
+                <TextField
+                  required
+                  label="Product Name"
+                  name="name"
+                  value={name}
+                  size="small"
+                  fullWidth="true"
+                  margin="dense"
+                  onChange={(e) => setName(e.target.value)}
+                />
+              </Grid>
+              <Grid item xs={12}>
+                <TextField
+                  required
+                  id="name"
+                  label="Author"
+                  value={author}
+                  size="small"
+                  fullWidth="true"
+                  margin="dense"
+                  onChange={(e) => setAuthor(e.target.value)}
+                />
+                    <Grid item xs={12}>
                   <TextField
-                    required
-                    fullWidth
-                    id="name"
-                    label="Product Name"
-                    name="name"
-                    autoComplete="Product Name"
-                    autoFocus
-                    value={name}
-                    onChange={(e) => setName(e.target.value)}
-                    placeholder="عنوان"
-                  />
-                </Grid>
-                <Grid item xs={6}>
-                  <TextField
-                    margin="normal"
-                    required
-                    fullWidth
-                    id="name"
-                    label="Price"
-                    name="name"
-                    value={price}
-                    onChange={(e) => setPrice(e.target.value)}
-                    type="number"
-                    placeholder="price"
-                    autoFocus
-                  />
-                </Grid>
-                <Grid item xs={6}>
-                  <TextField
-                    required
-                    fullWidth
-                    id="name"
                     label="Publisher"
                     name="name"
-                    autoComplete="Publisher"
-                    autoFocus
                     type="text"
-                    placeholder="publisher"
+                    size="small"
+                    fullWidth="true"
+                    margin="dense"
                     onChange={(e) => setPublisher(e.target.value)}
                   />
                 </Grid>
-                <Grid item xs={6}>
+                <Grid item xs={12}>
                   <TextField
                     required
-                    fullWidth
-                    id="name"
-                    label="Author"
-                    name="name"
-                    autoComplete="Author"
-                    autoFocus
-                    sx={{ padding: 0 }}
-                    value={author}
-                    onChange={(e) => setAuthor(e.target.value)}
-                    placeholder="Author"
+                    label="Price"
+                    value={price}
+                    onChange={(e) => setPrice(e.target.value)}
+                    type="number"
+                    size="small"
+                    margin="dense"
+                    fullWidth="true"
                   />
                 </Grid>
-                <Grid item>
+            
+
+                <Grid item xs={12}>
                   <TextField
+                    required
                     value={quantity}
                     onChange={(e) => setQuantity(e.target.value)}
                     type="number"
-                    placeholder="quantity"
+                    size="small"
+                    label = "Quantity"
+                    fullWidth="true"
+                    margin="dense"
                   />
                 </Grid>
-
-                <FormControl fullWidth>
-                  <InputLabel id="demo-simple-select-label">
-                    Category
-                  </InputLabel>
+                <Grid item xs={12}>
+                <FormControl sx={{ m: 1, minWidth: 120 }}>
+        <InputLabel id="demo-simple-select-helper-label">Category</InputLabel>
                   <Select
-                    labelId="demo-simple-select-label"
+                   labelId="demo-simple-select-helper-label"
+                  fullWidth="true"
                     id="demo-simple-select"
                     value={category}
                     onChange={(e) => setCategory(e.target.value)}
                     label="Category"
+                    size="small"
+                    margin="dense"
+                    required
                   >
                     {categories.map((category) => (
                       <MenuItem value={category.id}>{category.name}</MenuItem>
                     ))}
                   </Select>
-
-                  <Grid container>
-              <Grid item marginTop={4}>
-                <TextField
-                  sx={{ marginBottom: 2 }}
-                  accept="image/*"
-                  type="file"
-                  onChange={(e) => imageChange(e)}
-                />
-
-                {image && (
-                  <div>
-                    <IconButton onClick={removeSelectedImage} style={iconstyle}>
-                      <CloseIcon />
-                    </IconButton>
-
-                    <Avatar
-                      alt="The image"
-                      src={image}
-                      sx={{ width: 44, height: 54 }}
-                      variant={"rounded"}
-                    />
-                  </div>
-                )}
+                  </FormControl>
+                </Grid>
               </Grid>
-              </Grid>
-                </FormControl>
+              <Grid container>
+                <Grid item marginTop={2} xs={12}>
+                  <TextField
+                    sx={{ marginBottom: 2 }}
+                    accept="image/*"
+                    type="file"
+                    fullWidth="true"
+                    onChange={(e) => imageChange(e)}
+                  />
 
-                <CKEditor
-                  editor={ClassicEditor}
-                  sx={{ height: 50 }}
-                  initData="<p>Hello from CKEditor 4!</p>"
-                  onChange={(e, editor) => setDescription(editor.getData())}
-                />
+                  {image && (
+                    <div>
+                      <IconButton
+                        onClick={removeSelectedImage}
+                        style={iconstyle}
+                      >
+                        <CloseIcon />
+                      </IconButton>
+
+                      <Avatar
+                        alt="The image"
+                        src={image}
+                        sx={{ width: 44, height: 54 }}
+                        variant={"rounded"}
+                      />
+                    </div>
+                  )}
+                </Grid>
+                <Grid item xs={12}>
+                  <CKEditor
+                    editor={ClassicEditor}
+                    sx={{ height: 80 }}
+                    colomn="20"
+                    initData="<p>Hello from CKEditor 4!</p>"
+                    onChange={(e, editor) => setDescription(editor.getData())}
+                  />
+                </Grid>
               </Grid>
+              <Button type="submit">Save</Button>
+              <Button variant="contained" onClick={() => setOpen(false)}>
+                Cancel
+              </Button>
             </Grid>
-            <Button type="submit">Save</Button>
-          <Button variant="contained" onClick={() => setOpen(false)}>
-            Cancel
-          </Button>
           </form>
-
-        
         </Box>
       </Box>
     </Modal>
