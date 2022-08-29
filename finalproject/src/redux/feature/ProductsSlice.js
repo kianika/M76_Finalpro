@@ -53,7 +53,7 @@ const ProductsSlice = createSlice({
     },
     [createProducts.fulfilled]: (state, action) => {
       state.loadings = false;
-      state.products = action.payload;
+      state.products = [...state, action.payload]
     },
     [createProducts.rejected]: (state) => {
       state.loadings = false;

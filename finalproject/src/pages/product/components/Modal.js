@@ -16,7 +16,8 @@ import { InputLabel } from "@material-ui/core";
 import { CKEditor } from "@ckeditor/ckeditor5-react";
 import ClassicEditor from "@ckeditor/ckeditor5-build-classic";
 import { useDispatch } from "react-redux";
-import { createProducts } from "../../../redux/feature/ProductsSlice";
+import { createProducts, fetchProducts } from "../../../redux/feature/ProductsSlice";
+
 
 const style = {
   position: "absolute",
@@ -57,7 +58,9 @@ export default function Moodal(props) {
   // This function will be triggered when the file field change
   const imageChange = (e) => {
     if (e.target.files && e.target.files.length > 0) {
-      setSelectedImage(URL.createObjectURL(e.target.files[0]));
+      let file = e.target.files[0];
+      let pic = URL.createObjectURL(file)
+      setSelectedImage(pic);
     }
   };
 
@@ -85,9 +88,8 @@ export default function Moodal(props) {
     e.preventDefault();
    
     dispatch(createProducts(makeNewProduct()));
-    console.log(image);
     setOpen(false);
-    setLoading(!loading);
+   setLoading(!loading);
    
     console.log(makeNewProduct());
   };
