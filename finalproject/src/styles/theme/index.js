@@ -78,6 +78,15 @@ const theme = createTheme({
         }
       }
     },
+
+    MuiOutlinedInput: {
+      styleOverrides: {
+       input: {
+          padding: "3px",
+          textAlign: "center"
+        }
+      }
+  },
     MyShopButton: {
       styleOverrides: {
         root: {

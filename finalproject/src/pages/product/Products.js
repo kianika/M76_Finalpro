@@ -20,25 +20,34 @@ import DeleteIcon from "@mui/icons-material/Delete";
 import Container from "@mui/material/Container";
 import { Colors } from "../../styles/theme";
 import { fetchCategory } from "../../redux/feature/CategorySlice";
+import Modal from "./components/Modal"
 
 const Products = () => {
   const dispatch = useDispatch();
   const products = useSelector((state) => state.products.products);
   const total = useSelector((state) => state.products.total);
   const categories = useSelector((state) => state.categories.categories);
- 
+ const [loading, setLoading] = useState(false);
   
   let [page, setPage] = useState(1);
   const count = Math.ceil(total / 5);
 
   useEffect(() => {
     dispatch(fetchProducts({ page }));
-  }, [page, dispatch]);
+  }, [page, dispatch, loading]);
 
-  useEffect(() => {
-    dispatch(fetchCategory());
-   
-  }, []);
+ 
+    
+    useEffect(() => {
+      dispatch(fetchCategory());
+    }, []);
+  
+
+
+  //Add new product
+
+  const [add, setAdd] = useState()
+  const [open, setOpen] = useState(false);
 
   return (
     <React.Fragment>
@@ -47,9 +56,13 @@ const Products = () => {
           <Button
             variant="contained"
             sx={{ backgroundColor: Colors.primary, color: Colors.white }}
+            onClick = {() => setOpen(true)}
           >
             Add Item{" "}
           </Button>
+          {open && (
+                        <Modal  setOpen={setOpen} open={open} categories={categories} setLoading ={setLoading} loading = {loading} />
+                      )}
           <Typography variant="h5"> Products Management</Typography>
         </Stack>
 
