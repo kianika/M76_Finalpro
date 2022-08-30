@@ -20,25 +20,44 @@ import DeleteIcon from "@mui/icons-material/Delete";
 import Container from "@mui/material/Container";
 import { Colors } from "../../styles/theme";
 import { fetchCategory } from "../../redux/feature/CategorySlice";
+import Modal from "./components/Modal";
+import { deleteProducts } from "../../redux/feature/ProductsSlice";
 
 const Products = () => {
   const dispatch = useDispatch();
   const products = useSelector((state) => state.products.products);
   const total = useSelector((state) => state.products.total);
   const categories = useSelector((state) => state.categories.categories);
- 
-  
+  const [loading, setLoading] = useState(false);
+  const [Info, setInfo] = useState();
+  const [edit, setEdit] = useState(false);
+
   let [page, setPage] = useState(1);
   const count = Math.ceil(total / 5);
 
   useEffect(() => {
     dispatch(fetchProducts({ page }));
-  }, [page, dispatch]);
+  }, [page, dispatch, loading]);
 
   useEffect(() => {
     dispatch(fetchCategory());
-   
   }, []);
+
+  //Add new product
+
+  const [add, setAdd] = useState();
+  const [open, setOpen] = useState(false);
+
+  const handleEdit = (id) => {
+    setOpen(true);
+    setInfo(products.find((product) => product.id === id));
+    setEdit(true);
+  };
+
+  const handleDelete = (id) => {
+    dispatch(deleteProducts(id));
+    setLoading(!loading);
+  };
 
   return (
     <React.Fragment>
@@ -47,9 +66,22 @@ const Products = () => {
           <Button
             variant="contained"
             sx={{ backgroundColor: Colors.primary, color: Colors.white }}
+            onClick={() => setOpen(true)}
           >
             Add Item{" "}
           </Button>
+          {open && (
+            <Modal
+              setOpen={setOpen}
+              open={open}
+              categories={categories}
+              setLoading={setLoading}
+              loading={loading}
+              info={Info}
+              setEdit={setEdit}
+              edit={edit}
+            />
+          )}
           <Typography variant="h5"> Products Management</Typography>
         </Stack>
 
@@ -81,13 +113,17 @@ const Products = () => {
                   </TableCell>
                   {}
                   <TableCell align="left">{v.name}</TableCell>
-                  <TableCell align="left">{categories.map((item) => {if (item.id == v.category){
-                    return `${item.name}`
-                  }})}</TableCell>
+                  <TableCell align="left">
+                    {categories.map((item) => {
+                      if (item.id == v.category) {
+                        return `${item.name}`;
+                      }
+                    })}
+                  </TableCell>
                   <TableCell align="left">
                     <Stack direction="row" spacing={5}>
-                      <CreateIcon />
-                      <DeleteIcon />
+                      <CreateIcon onClick={() => handleEdit(v.id)} />
+                      <DeleteIcon onClick={() => handleDelete(v.id)} />
                     </Stack>{" "}
                   </TableCell>
                 </TableRow>

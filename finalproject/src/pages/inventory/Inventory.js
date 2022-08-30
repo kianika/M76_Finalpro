@@ -22,6 +22,7 @@ const Inventory = () => {
   const dispatch = useDispatch();
   const products = useSelector((state) => state.products.products);
   const total = useSelector((state) => state.products.total);
+  const [Ptag, setPtag] = useState(true);
 
   let [page, setPage] = useState(1);
   const count = Math.ceil(total / 5);
@@ -67,7 +68,8 @@ const Inventory = () => {
             {products.map((v) => (
               <TableRow
                 key={v.id}>
-                <TableCell align="left">{v.name}</TableCell>
+                <TableCell align="left"><p>{v.name}</p>
+                </TableCell>
                 <TableCell align="left">{v.price}</TableCell>
                 <TableCell align="left">{v.quantity}</TableCell> 
               </TableRow>
