@@ -18,8 +18,9 @@ import ClassicEditor from "@ckeditor/ckeditor5-build-classic";
 import { useDispatch } from "react-redux";
 import {
   createProducts,
-  fetchProducts,
+  updateProducts,
 } from "../../../redux/feature/ProductsSlice";
+
 
 const style = {
   position: "absolute",
@@ -33,6 +34,7 @@ const style = {
   boxShadow: 24,
   zIndex: 1,
   p: 4,
+  overflow: "scroll"
 };
 
 const iconstyle = {
@@ -43,18 +45,25 @@ const iconstyle = {
 };
 
 export default function Moodal(props) {
-  const { setOpen, open, categories, setLoading, loading } = props;
+  const { setOpen, open, categories, setLoading, loading, info, setEdit, edit } = props;
+
+  //Create New Product
 
   const dispatch = useDispatch();
-  const [description, setDescription] = useState([]);
-  const [name, setName] = useState();
-  const [author, setAuthor] = useState();
-  const [price, setPrice] = useState();
-  const [quantity, setQuantity] = useState();
-  const [category, setCategory] = useState();
-  const [createdAt, setcreatedAt] = useState();
-  const [publisher, setPublisher] = useState();
-  const [image, setSelectedImage] = useState();
+ 
+  const [description, setDescription] = useState(edit ? info.description : "");
+
+  const [name, setName] = useState(edit ? info.name : "");
+  const [author, setAuthor] = useState(edit ? info.author : "");
+  const [price, setPrice] = useState(edit ? info.price : "");
+  const [quantity, setQuantity] = useState(edit ? info.quantity : "");
+  const [category, setCategory] = useState(edit ? info.category : "");
+  const [publisher, setPublisher] = useState(edit ? info.publisher : "");
+  const [image, setSelectedImage] = useState(edit ? info.image : "");
+  
+  
+  //Edit Product
+
 
   // This function will be triggered when the file field change
   const imageChange = (e) => {
@@ -78,19 +87,41 @@ export default function Moodal(props) {
       image,
       price,
       quantity,
-      createdAt,
       category: Number(category),
       description,
     };
     return newBook;
   };
 
+  const EditNewProduct = () => {
+    const newBook = {
+      name,
+      author,
+      publisher,
+      language: info.language,
+      image,
+      price,
+      quantity,
+      createdAt: info.createdAt,
+      id: info.id,
+      category: Number(category),
+      subcategory: info.subcategory,
+      description,
+      
+     
+    };
+    return newBook;
+  };
+
   const handleAddNewBook = (e) => {
     e.preventDefault();
+    if(edit){dispatch(updateProducts(EditNewProduct()));}
+     else {
+      dispatch(createProducts(makeNewProduct()));}
 
-    dispatch(createProducts(makeNewProduct()));
     setOpen(false);
     setLoading(!loading);
+    
 
     console.log(makeNewProduct());
   };
@@ -147,6 +178,7 @@ export default function Moodal(props) {
                     size="small"
                     fullWidth="true"
                     margin="dense"
+                    value={publisher}
                     onChange={(e) => setPublisher(e.target.value)}
                   />
                 </Grid>
@@ -232,6 +264,7 @@ export default function Moodal(props) {
                     colomn="20"
                     initData="<p>Hello from CKEditor 4!</p>"
                     onChange={(e, editor) => setDescription(editor.getData())}
+                    data={description}
                   />
                 </Grid>
               </Grid>
