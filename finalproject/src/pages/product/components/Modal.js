@@ -118,11 +118,9 @@ export default function Moodal(props) {
     if(edit){dispatch(updateProducts(EditNewProduct()));}
      else {
       dispatch(createProducts(makeNewProduct()));}
-
+    setEdit(false);
     setOpen(false);
     setLoading(!loading);
-    
-
     console.log(makeNewProduct());
   };
 
