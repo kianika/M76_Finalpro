@@ -106,10 +106,8 @@ export default function Moodal(props) {
       id: info.id,
       category: Number(category),
       subcategory: info.subcategory,
-      description,
+      description};
       
-     
-    };
     return newBook;
   };
 
