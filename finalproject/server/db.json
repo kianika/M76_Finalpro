@@ -7,7 +7,7 @@
       "language": "English",
       "image": "http://localhost:3002/files/3a86be152bd3047e593e40680e5c2f32",
       "price": "11.99",
-      "quantity": 8,
+      "quantity": "[object Object]",
       "createdAt": 1643373068134,
       "id": 1,
       "category": 1,
@@ -20,13 +20,14 @@
       "publisher": "Random House USA Inc",
       "language": "English",
       "image": "http://localhost:3002/files/0d29e11e33a8c67f1a88266c00dc53d4",
-      "price": 20.92,
-      "quantity": 10,
+      "price": "25.92",
+      "quantity": "12",
       "createdAt": 1643373068134,
       "id": 2,
       "category": 1,
       "subcategory": 1,
-      "description": "<p>The New York Times bestseller that celebrates the dreams, acceptance, and love that parents have for their children . . . now and forever. This is the perfect heartfelt gift for kids of all ages, plus a great choice for baby showers, birthdays, graduations, and other new beginnings! From brave and bold to creative and clever, Emily Winfield Martin's rhythmic rhyme expresses all the loving things that parents think of when they look at their children. With beautiful, lush illustrations and a stunning gatefold that opens at the end, this is a book that families will love reading over and over. The Wonderful Things You Will Be has a loving and truthful message that will endure for lifetimes and makes a great gift to the ones you love for any occasion.</p>"
+      "description": "<p>The New York Times bestseller that celebrates the dreams, acceptance, and love that parents have for their children . . . now and forever. This is the perfect heartfelt gift for kids of all ages, plus a great choice for baby showers, birthdays, graduations, and other new beginnings! From brave and bold to creative and clever, Emily Winfield Martin's rhythmic rhyme expresses all the loving things that parents think of when they look at their children. With beautiful, lush illustrations and a stunning gatefold that opens at the end, this is a book that families will love reading over and over. The Wonderful Things You Will Be has a loving and truthful message that will endure for lifetimes and makes a great gift to the ones you love for any occasion.</p>",
+      "edited_field": "quantity"
     },
     {
       "name": "Monkey Puzzle",
@@ -34,13 +35,14 @@
       "publisher": "Pan Macmillan",
       "language": "English",
       "image": "http://localhost:3002/files/f28b1b379509bc9188b11376e70a0de9",
-      "price": 10.6,
-      "quantity": 3,
+      "price": "20.6",
+      "quantity": "14",
       "createdAt": 1643373068134,
       "id": 3,
       "category": 1,
       "subcategory": 1,
-      "description": "<p>کتاب ادبیات عامیانه نوشته طاهره جعفر قلیان یکی از کتاب‌های تخصصی انتشارات دانشگاه پیام نور است که برای تدریس در رشته ادبیات فارسی این دانشگاه طراحی و تدوین شده است.</p>"
+      "description": "<p>کتاب ادبیات عامیانه نوشته طاهره جعفر قلیان یکی از کتاب‌های تخصصی انتشارات دانشگاه پیام نور است که برای تدریس در رشته ادبیات فارسی این دانشگاه طراحی و تدوین شده است.</p>",
+      "edited_field": "price"
     },
     {
       "name": "The Dinosaur's Diary",
@@ -49,12 +51,13 @@
       "language": "English",
       "image": "http://localhost:3002/files/b3fa9e60e61f4bbc0252f665aa816f59",
       "price": 9.52,
-      "quantity": "9",
+      "quantity": "15",
       "createdAt": 1643373068134,
       "id": 4,
       "category": 1,
       "subcategory": 2,
-      "description": "<p>All fans of Julia Donaldson's should read the enchanting tale of The Dinosaur's Diary. Surviving and finding a safe place to lay her eggs is difficult for Hypsilophodon with dinosaurs like Tyrannosaurus Rex around. When she falls into a mysterious pool and finds herself on a modern farm there are still problems. Finally she finds a safe place to hatch her babies, but how can she keep thirteen baby dinosaurs safe and secret? When the farmer catches one - Hector - and plans to take him to the vet, it's up to Hypsilophodon and her fiesty daughter, Henrietta, to get him back. After a daring rescue, Hypsilophodon takes all her youngsters back through the mysterious pool to her own world.</p>"
+      "description": "<p>All fans of Julia Donaldson's should read the enchanting tale of The Dinosaur's Diary. Surviving and finding a safe place to lay her eggs is difficult for Hypsilophodon with dinosaurs like Tyrannosaurus Rex around. When she falls into a mysterious pool and finds herself on a modern farm there are still problems. Finally she finds a safe place to hatch her babies, but how can she keep thirteen baby dinosaurs safe and secret? When the farmer catches one - Hector - and plans to take him to the vet, it's up to Hypsilophodon and her fiesty daughter, Henrietta, to get him back. After a daring rescue, Hypsilophodon takes all her youngsters back through the mysterious pool to her own world.</p>",
+      "edited_field": "price"
     },
     {
       "name": "Peppa Pig: Practise with Peppa: Wipe-Clean First Letters",
@@ -131,19 +134,8 @@
       "id": 10,
       "category": 1,
       "description": "<p>dggdg</p>"
-    },
-    {
-      "name": "jhjhjh",
-      "author": "hghhg",
-      "publisher": "hghgh",
-      "image": "blob:http://localhost:3000/f8d9ae36-7fc6-4c67-b09e-26316761cf4b",
-      "price": "2",
-      "quantity": "7",
-      "createdAt": 1661886350559,
-      "id": 11,
-      "category": 1,
-      "description": "<p>bnbn</p>"
     }
+    
   ],
   "category": [
     {

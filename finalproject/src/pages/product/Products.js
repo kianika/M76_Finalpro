@@ -23,6 +23,7 @@ import { fetchCategory } from "../../redux/feature/CategorySlice";
 import Modal from "./components/Modal";
 import { deleteProducts } from "../../redux/feature/ProductsSlice";
 
+
 const Products = () => {
   const dispatch = useDispatch();
   const products = useSelector((state) => state.products.products);
