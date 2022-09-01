@@ -134,14 +134,14 @@ const ProductsSlice = createSlice({
     },
 
 
-    [fetchProducts.pending]: (state) => {
+    [fetchHomeProducts.pending]: (state) => {
       state.loadings = true;
     },
-    [fetchProducts.fulfilled]: (state, action) => {
+    [fetchHomeProducts.fulfilled]: (state, action) => {
       state.loadings = false;
       state.products = action.payload;
     },
-    [fetchProducts.rejected]: (state) => {
+    [fetchHomeProducts.rejected]: (state) => {
       state.loadings = false;
       state.error = "some thing went wrong :( ";
     }

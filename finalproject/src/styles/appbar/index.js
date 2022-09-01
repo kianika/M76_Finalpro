@@ -7,14 +7,14 @@ import { textPopUpTop } from "../../animations";
 
 export const AppbarContainer = styled(Box)(() => ({    
     display: 'flex',
-    marginTop: 2,
+    marginTop: 1,
     justifyContent: 'center',
   alignItems: 'center',
     padding: '1px 8px'
 }));
 
 export const AppbarHeader = styled(Typography)(() => ({
-  padding: "4px",
+  paddingLeft: "0.6em",
   flexGrow: 1,
   fontSize: "4em",
   fontFamily: '"Montez", "cursive"',
@@ -25,6 +25,7 @@ export const AppbarHeader = styled(Typography)(() => ({
 }));
 
 export const ActionIconsContainerMobile = styled(Box)(() => ({
+  paddingRight: "0.6em",
   display: 'flex',
   background: Colors.shaft,
   position: "fixed",
