@@ -5,38 +5,37 @@ import CardMedia from '@mui/material/CardMedia';
 import Typography from '@mui/material/Typography';
 import { Button, CardActionArea, CardActions } from '@mui/material';
 import ShoppingBasketIcon from '@mui/icons-material/ShoppingBasket';
+import { Product, ProductImage } from '../../../styles/product';
+import { Box } from '@mui/material';
+import { ProductContent } from '../../../styles/product';
+import { Colors } from '../../../styles/theme';
 
 export default function ProductCard({product}) {
 
    
     
   return (
-    <Card sx={{ width: 270, height: 260 }}>
-      <CardActionArea>
-        <CardMedia
-          component="img"
-          height="150"
-          image={product.image}
-          alt="green iguana"
-        />
-        <CardContent>
-          <Typography gutterBottom variant="h7" sx={{ fontWeight: 'bold' }}  component="div">
+    <Product>
+     
+      
+          <ProductImage src = {product.image} />
+          <ProductContent>
+          <Typography gutterBottom  sx={{ fontWeight: 'bold', fontSize: "16px" }}  component="div">
            {product.name }
           </Typography>
           <Typography variant="body2" color="text.secondary">
            by {product.author}
           </Typography>
           <Typography variant="body2" color="text.secondary" my={2}>
-           {product.price} $ <Button size="small" color="primary" sx={{marginLeft:"34px"}}>
-         Add to basket  
-          <ShoppingBasketIcon variant="h4" sx={{marginLeft:"10px"}} />
-        </Button>
+           {product.price} $ 
+         
           </Typography>
-        </CardContent>
-      </CardActionArea>
-      <CardActions>
-       
-      </CardActions>
-    </Card>
+          
+          </ProductContent>
+          <Button size="large"  startIcon={<ShoppingBasketIcon/>} variant="contained"  fullWidth sx={{color:Colors.primary}}>
+         Add to basket  
+        </Button>
+     
+    </Product>
   )
 }

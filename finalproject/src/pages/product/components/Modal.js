@@ -20,6 +20,7 @@ import {
   createProducts,
   updateProducts,
 } from "../../../redux/feature/ProductsSlice";
+import Colors from "../../../styles/theme"
 
 
 const style = {
@@ -141,7 +142,7 @@ export default function Moodal(props) {
         </Typography>
         <Divider orientation="horizontal" flexItem />
         <Box sx={{ my: 2 }}>
-          <form onSubmit={(e) => handleAddNewBook(e)}>
+          <form  onSubmit={(e) => handleAddNewBook(e)}>
             <Grid container>
               <Grid item xs={12}>
                 <TextField
@@ -264,8 +265,8 @@ export default function Moodal(props) {
                   />
                 </Grid>
               </Grid>
-              <Button type="submit">Save</Button>
-              <Button variant="contained" onClick={() => setOpen(false)}>
+              <Button type="submit" variant="contained"  sx={{ backgroundColor: Colors.primary, color: Colors.white }}>Save</Button>
+              <Button variant="contained"  sx={{ backgroundColor: Colors.primary, color: Colors.white }} onClick={() => setOpen(false)}>
                 Cancel
               </Button>
             </Grid>

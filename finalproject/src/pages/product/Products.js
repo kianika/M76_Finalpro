@@ -42,7 +42,7 @@ const Products = () => {
 
   useEffect(() => {
     dispatch(fetchCategory());
-  }, []);
+  }, [dispatch]);
 
   //Add new product
 
@@ -140,6 +140,7 @@ const Products = () => {
           variant="outlined"
           shape="rounded"
           onChange={(e, value) => setPage(value)}
+          sx={{ my: 5 }}
         />
       </Container>
     </React.Fragment>

@@ -1,24 +1,31 @@
-import { Grid } from "@material-ui/core";
+import { Grid } from "@mui/material";
 import ProductGrid from "./ProductGrid";
 
 import React from 'react'
+import { Colors } from "../../../styles/theme";
 
-export default function GridContainer({products, setName}) {
+export default function GridContainer({products, id }) {
 
      
 
   return (
      <Grid  container
-    spacing={3}
-    justifyContent="center"
-    sx={{ margin: `20px 4px 10px 4px` }}
-    columns={{ xs: 4, sm: 8, md: 12 }}
+     spacing={{ xs: 2, sm: 10, md: 6, lg: 4 }}
+    justifyContent="start"
+    display="flex"
+    paddingRight={20}
+    paddingLeft={20}
+    width="80%"
+    columns={{ xs: 1, sm: 2, md: 3 }}
+    
+    sx={{backgroundColor: Colors.light_gray}}
+  
     >
         {products
-          .filter((item) => item.category == 1)
+          .filter((item) => item.category == id)
           .slice(0, 6)
           .map((product) => (
-            <ProductGrid product = {product} setName = {setName}/>
+            <ProductGrid product = {product}/>
           ))}
         
       </Grid>

@@ -59,6 +59,16 @@ export const fetchHomeProducts = createAsyncThunk(
   }
 );
 
+//Categories page fetch
+
+export const fetchCategoriesProducts = createAsyncThunk(
+  "products/fetchCategoriesProducts",
+  (id) => {
+    return axios.get(`${BASE_URL}?category=${id}`).then((res) => res.data);
+  }
+);
+
+
 
 const ProductsSlice = createSlice({
   name: "products",
@@ -142,6 +152,18 @@ const ProductsSlice = createSlice({
       state.products = action.payload;
     },
     [fetchHomeProducts.rejected]: (state) => {
+      state.loadings = false;
+      state.error = "some thing went wrong :( ";
+    },
+
+    [fetchCategoriesProducts.pending]: (state) => {
+      state.loadings = true;
+    },
+    [fetchCategoriesProducts.fulfilled]: (state, action) => {
+      state.loadings = false;
+      state.products = action.payload;
+    },
+    [fetchCategoriesProducts.rejected]: (state) => {
       state.loadings = false;
       state.error = "some thing went wrong :( ";
     }
