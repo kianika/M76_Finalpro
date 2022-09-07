@@ -7,7 +7,7 @@ import { Colors } from '../../../styles/theme';
 
 export default function ProductGrid({product}) {
   return (
-    <Grid item key={product.id} xs={1} sm={1} md={1} display="flex" flexDirection={'column'} alignItems={"center"} justifyContent={'center'} my={3}>
+    <Grid item key={product.id} xs={12} sm={6} md={4} display="flex" flexDirection={'column'} alignItems={"center"} justifyContent={'center'} sx={{py:"0"}}>
         <ProductCard product = {product}  />
     </Grid>
   )

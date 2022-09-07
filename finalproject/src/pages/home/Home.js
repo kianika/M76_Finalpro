@@ -15,6 +15,7 @@ import LinkedCameraIcon from "@mui/icons-material/LinkedCamera";
 import ChildCareIcon from "@mui/icons-material/ChildCare";
 import { fetchCategory } from "../../redux/feature/CategorySlice";
 import Banner from "./components/Banner";
+import { Colors } from "../../styles/theme"
 
 function Home() {
   const dispatch = useDispatch();
@@ -41,7 +42,7 @@ function Home() {
     <Box style={style}>
       <Banner />
       {categories.map((item) => (
-        <Box style={style}>
+        <Box style={style} >
           <Link
             style={{ textDecoration: "none" }}
             to={{
@@ -50,12 +51,14 @@ function Home() {
             }}
           >
            
-            <Typography variant="h4" marginBottom={6} marginTop={2} color={"gray"} >
+            <Typography variant="h4" marginBottom={3} marginTop={3} color={"gray"} >
               <ChildCareIcon />
               {item.name}
             </Typography>
           </Link>
+          <Box>
           <GridContainer products={products} id={item.id}  />
+          </Box>
         </Box>
       ))}
     </Box>

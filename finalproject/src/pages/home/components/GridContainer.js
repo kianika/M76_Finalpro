@@ -10,15 +10,13 @@ export default function GridContainer({products, id }) {
 
   return (
      <Grid  container
-     spacing={{ xs: 2, sm: 10, md: 6, lg: 4 }}
-    justifyContent="start"
+     spacing={{ xs: 2, sm: 2, md: 3, lg: 0 }}
+    justifyContent="center"
     display="flex"
-    paddingRight={20}
-    paddingLeft={20}
-    width="80%"
-    columns={{ xs: 1, sm: 2, md: 3 }}
+    width="100%"
     
-    sx={{backgroundColor: Colors.light_gray}}
+    
+    sx={{ backgroundColor: Colors.light_gray, py:"0"}}
   
     >
         {products

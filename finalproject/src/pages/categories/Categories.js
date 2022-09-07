@@ -4,7 +4,7 @@ import CardContent from '@mui/material/CardContent';
 import CardMedia from '@mui/material/CardMedia';
 import Typography from '@mui/material/Typography';
 import { Button, CardActionArea, CardActions } from '@mui/material';
-import { Grid } from "@material-ui/core";
+import { Grid, Stack } from "@mui/material";
 import { Container } from "@mui/material";
 import ShoppingBasketIcon from '@mui/icons-material/ShoppingBasket';
 import { fetchCategoriesProducts } from '../../redux/feature/ProductsSlice';
@@ -14,7 +14,9 @@ import Box from "@mui/material/Box";
 import { useEffect } from 'react';
 import { useDispatch } from 'react-redux';
 import { useSelector } from 'react-redux';
-import { useParams } from "react-router-dom"
+import { Link, useParams } from "react-router-dom";
+import { ProductContent, ProductImage, Product } from '../../styles/product';
+import Sidebar from './components/Sidebar';
 
 
 
@@ -42,11 +44,7 @@ function Categories() {
 
   const style = {
     display: "flex",
-    justifyContent: "center",
-    alignItems: "center",
-    padding: "0px 100px",
-    borderRadius: "10px",
-    borderColor: "blue"
+    flexDirection:"center"
   }
 
   
@@ -54,55 +52,48 @@ function Categories() {
       
       <Container>
       <Typography></Typography>
-      <Box style={style}>
-        <Typography variant="h2"></Typography>
-       
-        <Grid  container
-    spacing={3}
-    justifyContent="center"
-    sx={{ margin: `20px 4px 10px 4px` }}
-    columns={{ xs: 4, sm: 8, md: 12 }}
+      <Box style={style} >
+      <Box flex={1} sx={{ display: { xs: "none", md: "flex" }, flexDirection:"column", justifyContent:"center", alignItems:"start"}}>
+     <Sidebar />
+       </Box>
+      
+        <Grid container    spacing={{ xs: 2, sm: 2, md: 3, lg: 1 }} sx={{flex:"2", display:"flex", alignItems:"center", justifyContent:"center"}}
     >
         {products
           .filter((item) => item.category == id)
           .slice(0, 6)
           .map((product) => (
-            <Grid item key={product.id} xs={2} sm={4} md={4} display="flex" flexDirection={'column'} alignItems="center">
-       <Card sx={{ width: 270, height: 260 }}>
-      <CardActionArea>
-        <CardMedia
-          component="img"
-          height="150"
-          image={product.image}
-          alt="green iguana"
-        />
-        <CardContent>
-          <Typography gutterBottom variant="h7" sx={{ fontWeight: 'bold' }}  component="div">
-           {product.name }
-          </Typography>
-          <Typography variant="body2" color="text.secondary">
-           by {product.author}
-          </Typography>
-          <Typography variant="body2" color="text.secondary" my={2}>
-           {product.price} $ <Button size="small" color="primary" sx={{marginLeft:"34px"}}>
-         Add to basket  
-          <ShoppingBasketIcon variant="h4" sx={{marginLeft:"10px"}} />
-        </Button>
-          </Typography>
-        </CardContent>
-      </CardActionArea>
-      <CardActions>
-       
-      </CardActions>
-    </Card>
-         
-        
+            <Link to={`../../product/${product.id}`}>
+            <Grid item key={product.id} xs={12} sm={6} md={4} display="flex" flexDirection={'column'} alignItems="start" justifyContent='center'>
+     
+     
+      <Box sx={{display:"flex", alignItems:"center", justifyContent:"start", py:2}}>
+     <img src = {product.image} style={{width:"150px", height:"180px"}}/>
+     </Box>
+    <Box sx={{display:"flex", flexDirection:'column', alignItems:"start", justifyContent:'start'}}>
+     <Typography gutterBottom  sx={{ fontWeight: 'bold', fontSize: "14px", width:"220px", height:"36px"}}  component="div">
+      {product.name }
+     </Typography>
+     <Typography variant="body2" color="text.secondary">
+      by {product.author}
+     </Typography>
+     <Typography variant="body2" color="text.secondary" marginTop={1}>
+      {product.price} $ 
+    
+     </Typography>
+     
+     </Box>
+  
+
+
       </Grid>
+      </Link>
        ))}
        </Grid>
-       
+      
+      
       </Box>
-
+<Box sx={{display:"flex", alignItems:"center", justifyContent:'center', py: 2}}>
       <Pagination
           count={2}
           size="large"
@@ -112,6 +103,7 @@ function Categories() {
           onChange={(e, value) => setPage(value)}
         />
 
+</Box>
     </Container>
     );
   }

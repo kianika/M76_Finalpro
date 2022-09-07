@@ -12,13 +12,13 @@ import { Colors } from '../../../styles/theme';
 
 export default function ProductCard({product}) {
 
-   
+ /*  <Button size="large"  startIcon={<ShoppingBasketIcon/>} variant="contained"  fullWidth sx={{color:Colors.primary}}>
+  Add to basket  
+ </Button> */
     
   return (
     <Product>
-     
-      
-          <ProductImage src = {product.image} />
+      <ProductImage src = {product.image} />
           <ProductContent>
           <Typography gutterBottom  sx={{ fontWeight: 'bold', fontSize: "16px" }}  component="div">
            {product.name }
@@ -32,9 +32,7 @@ export default function ProductCard({product}) {
           </Typography>
           
           </ProductContent>
-          <Button size="large"  startIcon={<ShoppingBasketIcon/>} variant="contained"  fullWidth sx={{color:Colors.primary}}>
-         Add to basket  
-        </Button>
+       
      
     </Product>
   )

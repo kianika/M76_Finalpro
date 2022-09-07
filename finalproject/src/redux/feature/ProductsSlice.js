@@ -68,6 +68,13 @@ export const fetchCategoriesProducts = createAsyncThunk(
   }
 );
 
+export const fetchSingleProducts = createAsyncThunk(
+  "products/fetchSingleProducts",
+  ({id}) => {
+    return axios.get(`${BASE_URL}?id=${id}`).then((res) => res.data);
+  }
+);
+
 
 
 const ProductsSlice = createSlice({
@@ -164,6 +171,18 @@ const ProductsSlice = createSlice({
       state.products = action.payload;
     },
     [fetchCategoriesProducts.rejected]: (state) => {
+      state.loadings = false;
+      state.error = "some thing went wrong :( ";
+    } ,
+
+    [fetchSingleProducts.pending]: (state) => {
+      state.loadings = true;
+    },
+    [fetchSingleProducts.fulfilled]: (state, action) => {
+      state.loadings = false;
+      state.products = action.payload;
+    },
+    [fetchSingleProducts.rejected]: (state) => {
       state.loadings = false;
       state.error = "some thing went wrong :( ";
     }

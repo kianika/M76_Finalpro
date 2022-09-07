@@ -47,11 +47,10 @@ const Inventory = () => {
   }, [page, dispatch, loading]);
 
   const handleEditPriceAndQuantity = (book) => {
-    {
-      setTempPrice(book.price)
-      setTempQuantity(book.quantity)
-    }
-    setEdit(true)
+    
+   
+    
+ setEdit("true");
     setTempId(book.id)
     setXxId({
       ...xxId,
@@ -148,11 +147,8 @@ const handleEdit = () => {
                     <TableCell align="left">
                       {v.name}
                     </TableCell>
-                    <TableCell align="left">
-                    <Typography
-                      component="div"
-                      onClick={() => handleEditPriceAndQuantity(v)}
-                    >
+                    <TableCell align="left"  onClick={() => handleEditPriceAndQuantity(v)}>
+                    
                       {edit && v.id === tempId ? (
                         <TextField
                           type="number"
@@ -165,7 +161,7 @@ const handleEdit = () => {
                           {v.price}
                         </Typography>
                       )}
-                    </Typography>
+                  
                     </TableCell>
                     <TableCell align="left">    <Typography
                       component="div"
