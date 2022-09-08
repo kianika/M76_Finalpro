@@ -1,20 +1,30 @@
 import SidebarLink from "./SidebarLink";
 import { Box } from "@mui/material";
-import ArrowDropDownIcon from '@mui/icons-material/ArrowDropDown';
+import { useEffect } from "react";
+import { useDispatch } from "react-redux";
+import { useSelector } from "react-redux";
+import { fetchCategory } from "../../../redux/feature/CategorySlice";
+
+
+
 function Sidebar(){
 
-   
+
+  const dispatch = useDispatch();
+  const categories = useSelector((state) => state.categories.categories);
+
+  useEffect(() => {
+    dispatch(fetchCategory());
+  }, [dispatch]);
+
   return(
     <Box>
-        <SidebarLink text="Home" />
-        <SidebarLink text="Explore" />
-        <SidebarLink text="Notifications" />
-        <SidebarLink text="Messages" />
-        <SidebarLink text="Bookmarks" />
-        <SidebarLink text="Lists" />
-        <SidebarLink text="Profile" />
-        <SidebarLink text="More" />
+     { categories.map(item => (
+        <SidebarLink text={item.name} id={item.id} />
+        ))} 
+        
     </Box>
+    
 
 
 

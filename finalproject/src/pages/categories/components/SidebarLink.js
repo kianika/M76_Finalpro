@@ -1,11 +1,17 @@
-import { Link } from "../../../styles/sidebar"
+import { CategoryLink } from "../../../styles/sidebar";
+import { Divider } from "@mui/material";
+import { Link } from "react-router-dom";
 
-
-function SidebarLink({ text }) {
-    return(
-      <Link>
-          <h2>{text}</h2>
-      </Link>
-    );
-  }
-  export default SidebarLink;
+function SidebarLink({ text, id }) {
+  return (
+    <>
+   
+      <CategoryLink to={""}>
+        <h3>{text}</h3>
+      </CategoryLink>
+      <Divider orientation="horizontal" flexItem />
+   
+    </>
+  );
+}
+export default SidebarLink;

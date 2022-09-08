@@ -111,7 +111,7 @@ const handleEdit = () => {
             sx={{ backgroundColor: Colors.primary, color: Colors.white }}
           onClick={() => handleEdit()}
           >
-            ذخیره
+            Save
           </Button>
           <Typography variant="h5"> Inventory Mnagement </Typography>
         </Stack>
@@ -200,6 +200,7 @@ const handleEdit = () => {
           page={page}
           variant="outlined"
           shape="rounded"
+          sx={{ my: 5 }}
           onChange={(e, value) => setPage(value)}
         />
       </Container>
