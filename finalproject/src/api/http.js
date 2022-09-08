@@ -19,7 +19,7 @@ export const injectStore = (_store) => {
 };
 
 const instance = axios.create({
-  baseURL:URL ,
+  baseURL:BASE_URL ,
   headers:{
   'content-type': 'application/json'
   }

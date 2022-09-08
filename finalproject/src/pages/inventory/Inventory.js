@@ -47,10 +47,11 @@ const Inventory = () => {
   }, [page, dispatch, loading]);
 
   const handleEditPriceAndQuantity = (book) => {
-    
-   
-    
- setEdit("true");
+    {
+      setTempPrice(book.price)
+      setTempQuantity(book.quantity)
+    }
+    setEdit(true)
     setTempId(book.id)
     setXxId({
       ...xxId,
@@ -110,7 +111,7 @@ const handleEdit = () => {
             sx={{ backgroundColor: Colors.primary, color: Colors.white }}
           onClick={() => handleEdit()}
           >
-            Save
+            ذخیره
           </Button>
           <Typography variant="h5"> Inventory Mnagement </Typography>
         </Stack>
@@ -147,8 +148,11 @@ const handleEdit = () => {
                     <TableCell align="left">
                       {v.name}
                     </TableCell>
-                    <TableCell align="left"  onClick={() => handleEditPriceAndQuantity(v)}>
-                    
+                    <TableCell align="left">
+                    <Typography
+                      component="div"
+                      onClick={() => handleEditPriceAndQuantity(v)}
+                    >
                       {edit && v.id === tempId ? (
                         <TextField
                           type="number"
@@ -161,7 +165,7 @@ const handleEdit = () => {
                           {v.price}
                         </Typography>
                       )}
-                  
+                    </Typography>
                     </TableCell>
                     <TableCell align="left">    <Typography
                       component="div"
@@ -197,7 +201,6 @@ const handleEdit = () => {
           variant="outlined"
           shape="rounded"
           onChange={(e, value) => setPage(value)}
-          sx={{ my: 5 }}
         />
       </Container>
     </React.Fragment>

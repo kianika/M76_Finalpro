@@ -15,7 +15,7 @@ const initialState = {
 
 export const fetchProducts = createAsyncThunk(
   "products/fetchProducts",
-  ({ page }) => {
+  ( {page} ) => {
     return axios.get(`${BASE_URL}?_limit=5&_page=${page}`).then((response) => {
       return {
         data: response.data,
@@ -28,14 +28,14 @@ export const fetchProducts = createAsyncThunk(
 export const createProducts = createAsyncThunk(
   "products/createProducts",
   (product) => {
-    return axios.post(BASE_URL, product).then((res) => res.data);
+    return instance.post(BASE_URL, product).then((res) => res.data);
   }
 );
 
 export const updateProducts = createAsyncThunk(
   "todos/updateProducts",  
   (product) => {
-  return axios.put(`${BASE_URL}/${product.id}`, product).then(res => res.data)
+  return instance.put(`${BASE_URL}/${product.id}`, product).then(res => res.data)
 } 
 );
 
