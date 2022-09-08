@@ -75,6 +75,7 @@ export default Navbar;
 import {
   Box,
   Divider,
+  InputBase,
   List,
   ListItemButton,
   ListItemIcon,
@@ -87,12 +88,15 @@ import {
   AppbarContainer,
   AppbarHeader,
   InList,
+  Search,
 } from "../../styles/appbar";
 
 import SearchIcon from "@mui/icons-material/Search";
 import Actions from "./Actions";
 import { Link } from "react-router-dom";
 import HomeIcon from '@mui/icons-material/Home';
+import MenuBookIcon from '@mui/icons-material/MenuBook';
+import Colors from "../../styles/theme";
 
 export default function AppBarDesktop({ matches }) {
   
@@ -104,14 +108,14 @@ export default function AppBarDesktop({ matches }) {
   
   return (
     <AppbarContainer>
-      <Link to="/" style={linkStyle}> <AppbarHeader variant="h4">Kianika</AppbarHeader>
+      <Link to="/" style={linkStyle}><MenuBookIcon sx={{display:{sm:"none", xs:"block"}}}/> <AppbarHeader variant="h6" sx= {{display:{xs:"none", sm:"block"}}}>Mind Style</AppbarHeader>
       </Link>
       <InList type="row">
-        <ListItemButton>
-          <ListItemIcon>
-            <SearchIcon />
-          </ListItemIcon>
-        </ListItemButton>
+       
+            <Search>
+              <InputBase placeholder="search..." />
+              </Search>
+       
           </InList>
        <Actions matches={matches} />   
     </AppbarContainer>

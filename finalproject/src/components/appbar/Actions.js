@@ -7,7 +7,7 @@ import { Link } from "react-router-dom";
 
 export default function Actions({ matches }) {
 
-  const Component = matches ? ActionIconsContainerMobile : ActionIconsContainerDesktop;
+  const Component =  ActionIconsContainerDesktop;
 
   return (
     <Component>

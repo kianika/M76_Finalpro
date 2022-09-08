@@ -26,8 +26,8 @@ function Router() {
           <Routes>
             <Route path="/" element={<SharedLayout />}>
               <Route index element={<Home />} />
-              <Route path="categories" element={<Categories />} />
-              <Route path="product" element={<Product />} />
+              <Route path="categories/:id" element={<Categories />} />
+              <Route path="product/:id" element={<Product />} />
               <Route path="shoppingCart" element={<ShoppingCart />} />
               <Route path="checkout" element={<Checkout />} />
               <Route path="successPayment" element={<SuccessPayment />} />

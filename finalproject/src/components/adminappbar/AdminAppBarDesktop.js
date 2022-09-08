@@ -17,7 +17,7 @@ import {
 import { Link } from "react-router-dom";
 import SearchIcon from "@mui/icons-material/Search";
 
-export default function AdminAppBarDesktop({ matches }) {
+export default function AdminAppBarDesktop() {
   const linkStyle = {
     margin: "1rem",
     textDecoration: "none",
@@ -26,12 +26,18 @@ export default function AdminAppBarDesktop({ matches }) {
   return (
     <AppbarContainer>
       <Link to="/" style={linkStyle}>
-        <AppbarHeader variant="h4">Kianika</AppbarHeader>
+        <AppbarHeader variant="h4">Mind Style</AppbarHeader>
       </Link>
       <MyList type="row">
-        <Link to="/admin/orders" style={linkStyle}>Orders</Link>
-        <Link to="/admin/inventory" style={linkStyle}>Inventory</Link>
-        <Link to="/admin" style={linkStyle}>Products</Link>
+        <Link to="/admin/orders" style={linkStyle}>
+          Orders
+        </Link>
+        <Link to="/admin/inventory" style={linkStyle}>
+          Inventory
+        </Link>
+        <Link to="/admin" style={linkStyle}>
+          Products
+        </Link>
       </MyList>
     </AppbarContainer>
   );

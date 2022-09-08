@@ -26,7 +26,7 @@ export const fetchOrders = createAsyncThunk("orders/fetchOrders", ({delivered, p
 })
  */
 export const changeDelivered = createAsyncThunk("orders/changeDelivered",  (id) => {
-    return axios.patch(`${BASE_URL}/${id}`, {delivered: false}).then(res => res.data)
+    return axios.patch(`${BASE_URL}/${id}`, {delivered: true}).then(res => res.data)
 } )
 
 /* export const changeNotDone = createAsyncThunk("todos/changeNotDone",  (id) => {
