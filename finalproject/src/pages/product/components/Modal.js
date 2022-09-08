@@ -118,7 +118,6 @@ export default function Moodal(props) {
       dispatch(createProducts(makeNewProduct()));}
     setEdit(false);
     setOpen(false);
-    setLoading(!loading);
     console.log(makeNewProduct());
   };
 

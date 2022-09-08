@@ -33,7 +33,7 @@ const CategorySlice = createSlice({
         [fetchCategory.rejected]: (state) => {
             state.loadings= false;
             state.error = "some thing went wrong :( "
-        },
+        }
 
         // FETCH POST 
      

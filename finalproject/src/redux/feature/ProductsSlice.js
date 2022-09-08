@@ -15,7 +15,7 @@ const initialState = {
 
 export const fetchProducts = createAsyncThunk(
   "products/fetchProducts",
-  ({ page }) => {
+  ( {page} ) => {
     return axios.get(`${BASE_URL}?_limit=5&_page=${page}`).then((response) => {
       return {
         data: response.data,
@@ -28,14 +28,14 @@ export const fetchProducts = createAsyncThunk(
 export const createProducts = createAsyncThunk(
   "products/createProducts",
   (product) => {
-    return axios.post(BASE_URL, product).then((res) => res.data);
+    return instance.post(BASE_URL, product).then((res) => res.data);
   }
 );
 
 export const updateProducts = createAsyncThunk(
   "todos/updateProducts",  
   (product) => {
-  return axios.put(`${BASE_URL}/${product.id}`, product).then(res => res.data)
+  return instance.put(`${BASE_URL}/${product.id}`, product).then(res => res.data)
 } 
 );
 
@@ -58,6 +58,23 @@ export const fetchHomeProducts = createAsyncThunk(
     return axios.get(`${BASE_URL}`).then((res) => res.data);
   }
 );
+
+//Categories page fetch
+
+export const fetchCategoriesProducts = createAsyncThunk(
+  "products/fetchCategoriesProducts",
+  (id) => {
+    return axios.get(`${BASE_URL}?category=${id}`).then((res) => res.data);
+  }
+);
+
+export const fetchSingleProducts = createAsyncThunk(
+  "products/fetchSingleProducts",
+  ({id}) => {
+    return axios.get(`${BASE_URL}?id=${id}`).then((res) => res.data);
+  }
+);
+
 
 
 const ProductsSlice = createSlice({
@@ -134,14 +151,38 @@ const ProductsSlice = createSlice({
     },
 
 
-    [fetchProducts.pending]: (state) => {
+    [fetchHomeProducts.pending]: (state) => {
       state.loadings = true;
     },
-    [fetchProducts.fulfilled]: (state, action) => {
+    [fetchHomeProducts.fulfilled]: (state, action) => {
       state.loadings = false;
       state.products = action.payload;
     },
-    [fetchProducts.rejected]: (state) => {
+    [fetchHomeProducts.rejected]: (state) => {
+      state.loadings = false;
+      state.error = "some thing went wrong :( ";
+    },
+
+    [fetchCategoriesProducts.pending]: (state) => {
+      state.loadings = true;
+    },
+    [fetchCategoriesProducts.fulfilled]: (state, action) => {
+      state.loadings = false;
+      state.products = action.payload;
+    },
+    [fetchCategoriesProducts.rejected]: (state) => {
+      state.loadings = false;
+      state.error = "some thing went wrong :( ";
+    } ,
+
+    [fetchSingleProducts.pending]: (state) => {
+      state.loadings = true;
+    },
+    [fetchSingleProducts.fulfilled]: (state, action) => {
+      state.loadings = false;
+      state.products = action.payload;
+    },
+    [fetchSingleProducts.rejected]: (state) => {
       state.loadings = false;
       state.error = "some thing went wrong :( ";
     }

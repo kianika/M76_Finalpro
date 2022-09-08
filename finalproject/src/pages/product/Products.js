@@ -33,7 +33,7 @@ const Products = () => {
   const [Info, setInfo] = useState();
   const [edit, setEdit] = useState(false);
 
-  let [page, setPage] = useState(1);
+  const [page, setPage] = useState(1);
   const count = Math.ceil(total / 5);
 
   useEffect(() => {
@@ -42,7 +42,7 @@ const Products = () => {
 
   useEffect(() => {
     dispatch(fetchCategory());
-  }, []);
+  }, [dispatch]);
 
   //Add new product
 
@@ -57,6 +57,7 @@ const Products = () => {
 
   const handleDelete = (id) => {
     dispatch(deleteProducts(id));
+    setPage(1);
     setLoading(!loading);
   };
 
@@ -81,6 +82,8 @@ const Products = () => {
               info={Info}
               setEdit={setEdit}
               edit={edit}
+              page ={page}
+              fetchProducts = {fetchProducts}
             />
           )}
           <Typography variant="h5"> Products Management</Typography>
@@ -140,6 +143,7 @@ const Products = () => {
           variant="outlined"
           shape="rounded"
           onChange={(e, value) => setPage(value)}
+          sx={{ my: 5 }}
         />
       </Container>
     </React.Fragment>
