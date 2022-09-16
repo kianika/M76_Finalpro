@@ -58,7 +58,7 @@ export default function SignIn() {
             <LockOutlinedIcon />
           </Avatar>
           <Typography component="h1" variant="h5">
-            ورود به پنل ادمین فروشگاه آنلاین کتابدار
+            Login Page
           </Typography>
           <Box component="form" onSubmit={handleSubmit} noValidate sx={{ mt: 1 }}>
          
@@ -67,7 +67,7 @@ export default function SignIn() {
               required
               fullWidth
               id="email"
-              label="نام کاربری"
+              label="Username"
               name="email"
               autoComplete="email"
               autoFocus
@@ -77,14 +77,14 @@ export default function SignIn() {
               required
               fullWidth
               name="password"
-              label="رمز عبور"
+              label="Password"
               type="password"
               id="password"
               autoComplete="current-password"
             />
             <FormControlLabel
               control={<Checkbox value="remember" color="primary" />}
-              label="مرا بخاطر بسپار"
+              label="Remember me"
             />
             <Button
               type="submit"
@@ -98,7 +98,7 @@ export default function SignIn() {
             <Grid container>
               <Grid item xs>
               <Link to="/" >
-              بازگشت به صفحه اصلی
+              Back to Home Page
               </Link>
               </Grid>
             </Grid>

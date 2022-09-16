@@ -16,92 +16,106 @@ import Pagination from "@mui/material/Pagination";
 import { useState } from "react";
 import { Container } from "@mui/system";
 import { Colors } from "../../styles/theme";
-import { EditText, EditTextarea } from 'react-edit-text';
-import { editQuantity } from "../../redux/feature/ProductsSlice";
 import { TextField } from "@mui/material";
-import axios from "axios";
 import instance from "../../api/http";
-
 
 const Inventory = () => {
   const dispatch = useDispatch();
   const products = useSelector((state) => state.products.products);
   const total = useSelector((state) => state.products.total);
-  const [Ptag, setPtag] = useState(true);
-  const length = products.length;
-  const [price, setPrice] = useState();
+  const objList = [];
+
   let [page, setPage] = useState(1);
-  const [tempId, setTempId] = useState()
-  const [tempPrice, setTempPrice] = useState()
-  const [temptQuantity, setTempQuantity] = useState()
-  const [goods, setGoods] = useState([])
-  const [edit, setEdit] = useState(false)
-  const [xxId, setXxId] = useState({})
+  const [goods, setGoods] = useState([]);
+  const [prices, setPrices] = useState([]);
   const count = Math.ceil(total / 5);
   const [loading, setLoading] = useState(false);
+  const [state, setState] = useState([]);
 
   const BASE_URL = "http://localhost:3002/products";
 
   useEffect(() => {
     dispatch(fetchProducts({ page }));
+    escCancel();
+    setState([]);
   }, [page, dispatch, loading]);
 
-  const handleEditPriceAndQuantity = (book) => {
-    {
-      setTempPrice(book.price)
-      setTempQuantity(book.quantity)
+  const Edit = (e, name, id) => {
+    const l = e.target.name;
+    console.log(l);
+    if (name === "price") {
+      setPrices([...prices, id]);
+    } else {
+      setGoods([...goods, id]);
     }
-    setEdit(true)
-    setTempId(book.id)
-    setXxId({
-      ...xxId,
-      [book.id]: {id: tempId, price: tempPrice, quantity: temptQuantity },
-    })
-    console.log(xxId)
-  }
+  };
+  const escCancel = () => {
+    document.addEventListener("keydown", (e) => {
+      if (e.key === "Escape") {
+        setPrices([]);
+        setGoods([]);
+        setState([]);
 
-const handleEdit = () => {
+        setLoading(!loading);
+      }
+    });
+  };
 
+  const handleChange = (e, id) => {
+    const name = e.target.name;
+    const value = e.target.value;
+    const item = state.find((item) => item.id === id);
+    if (item) {
+      item[[name]] = value;
+    } else {
+      const obj = { id: id, [name]: value };
+      setState([...state, obj]);
+    }
 
-  
-    // Object.values(xxId[i])[2]
-  for (const i in xxId){
+    console.log(state);
+  };
 
-    const id = Object.values(xxId[i])[0];
-    const value = Object.values(xxId[i])[2];
-    const pricevalue = Object.values(xxId[i])[1];
-
-
-    instance.patch(`${BASE_URL}/${id}`,
-            { "edited_field": "quantity", "quantity": value },
-            { headers: { 'Content-Type': 'application/json' }, }
-        ).then((response) => {
-           console.log(response);
-        }).catch((error) => {
-            // Code
-            console.log(error);
+  const handleEdit = () => {
+    //console.log(result);
+    state.map(({ id, quantity }) =>
+      instance
+        .patch(
+          `${BASE_URL}/${id}`,
+          { edited_field: "quantity", quantity: quantity },
+          { headers: { "Content-Type": "application/json" } }
+        )
+        .then((response) => {
+          console.log(response);
         })
+        .catch((error) => {
+          // Code
+          console.log(error);
+          setLoading(!loading);
+        })
+    );
 
-        instance.patch(`${BASE_URL}/${id}`,
-        { "edited_field": "price", "price": pricevalue },
-        { headers: { 'Content-Type': 'application/json' }, }
-    ).then((response) => {
-       console.log(response);
-    }).catch((error) => {
-        // Code
-        console.log(error);
-    })
+    state.map(({ id, price }) =>
+      instance
+        .patch(
+          `${BASE_URL}/${id}`,
+          { edited_field: "price", price: price },
+          { headers: { "Content-Type": "application/json" } }
+        )
+        .then((response) => {
+          console.log(response);
+          setLoading(!loading);
+          
+        })
+        .catch((error) => {
+          // Code
+          console.log(error);
+        })
+    );
+   
+    setPrices([]);
+    setGoods([]);
+  };
 
-    
-
-      
-       
-  }
-  setLoading(!loading);
- }
-
-
- 
   return (
     <React.Fragment>
       <Container>
@@ -109,7 +123,7 @@ const handleEdit = () => {
           <Button
             variant="contained"
             sx={{ backgroundColor: Colors.primary, color: Colors.white }}
-          onClick={() => handleEdit()}
+            onClick={() => handleEdit()}
           >
             Save
           </Button>
@@ -137,56 +151,40 @@ const handleEdit = () => {
                 </TableRow>
               </TableHead>
               <TableBody>
-                {/*  {products.map((product) => (
-                    <ListItem key={product.id}>
-                        <ListItemText>{product.name}</ListItemText>
-                        </ListItem>
-                ))} */}
-
-                {products.map((v) => (
+                {products.map((v, index) => (
                   <TableRow key={v.id}>
-                    <TableCell align="left">
-                      {v.name}
-                    </TableCell>
-                    <TableCell align="left">
-                    <Typography
-                      component="div"
-                      onClick={() => handleEditPriceAndQuantity(v)}
+                    <TableCell align="left">{v.name}</TableCell>
+                    <TableCell
+                      align="left"
+                      onClick={(e) => Edit(e, "price", v.id)}
                     >
-                      {edit && v.id === tempId ? (
+                      {prices.includes(v.id) ? (
                         <TextField
-                          type="number"
-                          name="price"
                           defaultValue={v.price}
-                          onChange={(e) => setTempPrice(e.target.value)}
+                          id={v.id}
+                          onChange={(event) => handleChange(event, v.id)}
+                          name="price"
                         />
                       ) : (
-                        <Typography component="p">
-                          {v.price}
-                        </Typography>
+                        <Typography>{v.price}</Typography>
                       )}
-                    </Typography>
                     </TableCell>
-                    <TableCell align="left">    <Typography
-                      component="div"
-                      onClick={() => handleEditPriceAndQuantity(v)}
+                    <TableCell
+                      align="left"
+                      id={v.id}
+                      onClick={(e) => Edit(e, "quantity", v.id)}
                     >
-                      {edit && v.id === tempId ? (
+                      {goods.includes(v.id) ? (
                         <TextField
-                          type="number"
+                          id={v.id}
                           name="quantity"
                           defaultValue={v.quantity}
-                          onChange={
-                            (e) => setTempQuantity(e.target.value)
-                            // onChange={(e) => setTempQuantity(e.target.value)
-                          }
+                          onChange={(e) => handleChange(e, v.id)}
                         />
                       ) : (
-                        <Typography component="p">
-                          {v.quantity}
-                        </Typography>
+                        <Typography>{v.quantity}</Typography>
                       )}
-                    </Typography></TableCell>
+                    </TableCell>
                   </TableRow>
                 ))}
               </TableBody>
@@ -207,4 +205,5 @@ const handleEdit = () => {
     </React.Fragment>
   );
 };
+
 export default Inventory;
