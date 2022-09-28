@@ -6,8 +6,8 @@ import instance from "../../api/http"
 
 const BASE_URL = "http://localhost:3002/products";
 const initialState = {
-  products: [{
-  }],
+  products: [
+],
   loadings: false,
   total: 0,
   error: "",
@@ -33,10 +33,17 @@ export const createProducts = createAsyncThunk(
 );
 
 export const updateProducts = createAsyncThunk(
-  "todos/updateProducts",  
-  (product) => {
-  return instance.put(`${BASE_URL}/${product.id}`, product).then(res => res.data)
-} 
+  "products/updateProducts",  
+  async (product, {toast}) => {
+ try {
+  const {id} = product;
+  const response = await instance.put(`${BASE_URL}/${id}`, product);
+ // toast.success("Added successfully");
+  return response.data
+} catch(err){
+  return err.message
+}
+  }
 );
 
 export const deleteProducts = createAsyncThunk(
@@ -131,7 +138,11 @@ const ProductsSlice = createSlice({
     },
     [updateProducts.fulfilled]: (state, action) => {
       state.loadings = false;
-      state.products = [...state, action.payload]
+      const {id} = action.payload;
+      const products = state.products.map(product => product.id === id ? action.payload : product);
+console.log([...products]);
+      
+      state.products = products;
     },
     [updateProducts.rejected]: (state) => {
       state.loadings = false;
