@@ -16,8 +16,10 @@ import { InputLabel } from "@material-ui/core";
 import { CKEditor } from "@ckeditor/ckeditor5-react";
 import ClassicEditor from "@ckeditor/ckeditor5-build-classic";
 import { useDispatch } from "react-redux";
+import { toast } from "react-toastify"
 import {
   createProducts,
+  fetchProducts,
   updateProducts,
 } from "../../../redux/feature/ProductsSlice";
 
@@ -39,20 +41,18 @@ const style = {
 
 const iconstyle = {
   position: "absolute",
-  top: "49%",
+  top: "78%",
   zIndex: "1",
-  left: "5%",
+  left: "3%"
 };
 
 export default function Moodal(props) {
-  const { setOpen, open, categories, setLoading, loading, info, setEdit, edit } = props;
+  const { setOpen, open, categories, setLoading, loading, info, setEdit, edit, page } = props;
 
-  //Create New Product
 
   const dispatch = useDispatch();
  
   const [description, setDescription] = useState(edit ? info.description : "");
-
   const [name, setName] = useState(edit ? info.name : "");
   const [author, setAuthor] = useState(edit ? info.author : "");
   const [price, setPrice] = useState(edit ? info.price : "");
@@ -65,7 +65,7 @@ export default function Moodal(props) {
   //Edit Product
 
 
-  // This function will be triggered when the file field change
+ 
   const imageChange = (e) => {
     if (e.target.files && e.target.files.length > 0) {
       let file = e.target.files[0];
@@ -113,7 +113,8 @@ export default function Moodal(props) {
 
   const handleAddNewBook = (e) => {
     e.preventDefault();
-    if(edit){dispatch(updateProducts(EditNewProduct()));}
+    if(edit){dispatch(updateProducts(EditNewProduct()));
+  }
      else {
       dispatch(createProducts(makeNewProduct()));}
     setEdit(false);

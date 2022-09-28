@@ -54,6 +54,12 @@ function Product() {
     dispatch(fetchSingleProducts({ id }));
   }, []);
 
+  const addToCart = (id) => {
+    const clickedItem = product[0];
+    const Basket = JSON.parse(localStorage.getItem('basket')) ?? [] //
+    localStorage.setItem('basket', JSON.stringify([...Basket, ...clickedItem]))
+  }
+
   return (
     <Container>
       <DetailContainer direction={"row"} spacing={2} display={"flex"}>
